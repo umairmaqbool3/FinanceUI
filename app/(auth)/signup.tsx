@@ -1,5 +1,3 @@
-import Facebook from '@/assets/svgs/Facebook';
-import Google from '@/assets/svgs/Google';
 import CustomButton from '@/components/CustomButton';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
@@ -9,13 +7,15 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 
 const SignupScreen = () => {
     const { width, height } = useWindowDimensions();
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const theme = useColorScheme() ?? 'light';
+
+    const themedColor = { color: Colors[theme].text }
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -24,8 +24,17 @@ const SignupScreen = () => {
             </View>
 
             <View style={[styles.contentContainer, { height: height * 0.76, backgroundColor: Colors[theme].secondary }]}>
-                <View style={styles.formContainer}>
-                    <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Username Or Email</ThemedText>
+                <ScrollView style={styles.formContainer} showsVerticalScrollIndicator={false}>
+                    <ThemedText style={[styles.label, themedColor]}>Full Name</ThemedText>
+                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                        <TextInput
+                            placeholder="i.e John Doe"
+                            placeholderTextColor={Colors[theme].icon}
+                            style={[styles.input, { color: Colors[theme].text }]}
+                        />
+                    </View>
+
+                    <ThemedText style={[styles.label, themedColor]}>Email</ThemedText>
                     <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
                         <TextInput
                             placeholder="example@example.com"
@@ -34,65 +43,88 @@ const SignupScreen = () => {
                         />
                     </View>
 
-                    <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Password</ThemedText>
+                    <ThemedText style={[styles.label, themedColor]}>Mobile Number</ThemedText>
+                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                        <TextInput
+                            placeholder="+ 123 456 789"
+                            placeholderTextColor={Colors[theme].icon}
+                            style={[styles.input, { color: Colors[theme].text }]}
+                        />
+                    </View>
+
+                    <ThemedText style={[styles.label, themedColor]}>Date Of Birth</ThemedText>
+                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                        <TextInput
+                            placeholder="DD / MM / YYYY"
+                            placeholderTextColor={Colors[theme].icon}
+                            style={[styles.input, { color: Colors[theme].text }]}
+                        />
+                    </View>
+
+                    <ThemedText style={[styles.label, themedColor]}>Password</ThemedText>
                     <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
                         <TextInput
                             placeholder="● ● ● ● ● ● ● ●"
                             placeholderTextColor={Colors.dark.primary}
                             secureTextEntry={!showPassword}
-                            style={[styles.input, { color: Colors[theme].text, opacity: 0.3 }]}
+                            style={[styles.input, { color: Colors[theme].text, opacity: 0.3, fontSize: 12 }]}
                         />
                         <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
                             <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._35 }}>
-                        <CustomButton
-                            title="Log In"
-                            textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            onPress={() => console.log("clcked")}
+                    <ThemedText style={[styles.label, themedColor]}>Confirm Password</ThemedText>
+                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                        <TextInput
+                            placeholder="● ● ● ● ● ● ● ●"
+                            placeholderTextColor={Colors.dark.primary}
+                            secureTextEntry={!showPassword}
+                            style={[styles.input, { color: Colors[theme].text, opacity: 0.3, fontSize: 12 }]}
                         />
+                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+                            <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
+                        </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity>
-                        <ThemedText style={[styles.forgotPasswordText, { color: Colors[theme].text }]}>Forgot Password?</ThemedText>
-                    </TouchableOpacity>
-
-                    <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-                        <CustomButton
-                            title="Sign Up"
-                            textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            containerStyle={{ backgroundColor: Colors.light.secondaryBtn }}
-                            onPress={() => console.log("clcked")}
-                        />
-                    </View>
-
-                    <View style={styles.fingerprintContainer}>
-                        <ThemedText style={[styles.fingerprintText, { color: Colors[theme].text }]}>
-                            Use{' '}
-                            <ThemedText style={[styles.fingerprintLink, { color: Colors[theme].focusText }]}>Fingerprint</ThemedText>
-                            {' '}To Access
+                    <View style={{ marginHorizontal: spacingX._20, marginTop: spacingY._10 }}>
+                        <ThemedText style={[styles.agreeText, themedColor]}>
+                            By continuing, you agree to
+                            {'\n '}
+                            <ThemedText style={[styles.termAndPolicyText, themedColor]}>
+                                Terms of Service
+                            </ThemedText>
+                            {' '}
+                            and
+                            {' '}
+                            <ThemedText style={[styles.termAndPolicyText, themedColor]}>
+                                Privacy Policy
+                            </ThemedText>
                         </ThemedText>
                     </View>
 
-                    <View style={styles.orContainer}>
-                        <ThemedText style={[styles.orText, { color: Colors[theme].text }]}>or sign up with</ThemedText>
-                    </View>
-
-                    <View style={styles.socialContainer}>
-                        <TouchableOpacity>
-                            <Facebook color={theme === 'light' ? '' : Colors.light.secondaryBtn} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Google color={theme === 'light' ? '' : Colors.light.secondaryBtn} />
-                        </TouchableOpacity>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._5 }}>
+                        <CustomButton
+                            title="Sign Up"
+                            textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
+                            onPress={() => console.log("clcked")}
+                        />
                     </View>
 
                     <View style={styles.footer}>
-                        <ThemedText style={[styles.footerText, { color: Colors[theme].text }]}>Don't have an account? <ThemedText style={[styles.signUpLink, { color: Colors[theme].focusText }]}>Sign Up</ThemedText></ThemedText>
+                        <ThemedText style={[styles.footerText, themedColor]}>
+                            Already have an account?{'   '}
+                            <ThemedText
+                                style={[styles.termAndPolicyText, { color: Colors[theme].focusText }]}
+                                onPress={() => router.replace('/login')}
+                            >
+                                Log In
+                            </ThemedText>
+                        </ThemedText>
                     </View>
-                </View>
+
+                    <View style={{ height: spacingY._30 }} />
+                </ScrollView>
             </View>
         </Screen>
     );
@@ -125,8 +157,8 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 14,
         fontWeight: '400',
-        marginBottom: spacingY._5,
-        marginTop: spacingY._10,
+        // marginBottom: spacingY._5,
+        marginTop: spacingY._5,
         marginLeft: spacingX._10,
     },
     inputContainer: {
@@ -146,57 +178,23 @@ const styles = StyleSheet.create({
     eyeIcon: {
         padding: 5,
     },
-    forgotPasswordText: {
+    agreeText: {
         textAlign: 'center',
         fontSize: 12,
-        fontWeight: '500',
+        fontWeight: '300',
         marginVertical: spacingY._10,
-    },
-    fingerprintContainer: {
-        alignItems: 'center',
-        marginVertical: spacingY._17,
-    },
-    fingerprintText: {
-        fontSize: 12,
-        fontWeight: '500',
-        letterSpacing: spacingX._1,
-    },
-    fingerprintLink: {
-        fontWeight: '500',
-        fontSize: 13,
-    },
-    orContainer: {
-        alignItems: 'center',
-        marginBottom: spacingY._15,
-    },
-    orText: {
-        fontSize: 12,
-        marginTop: 10,
-        opacity: 0.8
-    },
-    socialContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        gap: 15,
-        marginBottom: spacingY._20,
-    },
-    socialButton: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        lineHeight: 15
     },
     footer: {
         alignItems: 'center',
+        marginVertical: spacingY._10,
     },
     footerText: {
         fontSize: 12,
         opacity: 0.8
     },
-    signUpLink: {
-        fontWeight: '400',
-        fontSize: 13,
+    termAndPolicyText: {
+        fontWeight: '500',
+        fontSize: 12,
     },
 });

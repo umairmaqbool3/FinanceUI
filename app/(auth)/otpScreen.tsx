@@ -7,55 +7,87 @@ import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { OtpInput } from "react-native-otp-entry";
 
-const ForgotPasswordScreen = () => {
+const OTPScreen = () => {
     const { width, height } = useWindowDimensions();
     const router = useRouter();
-    const [showPassword, setShowPassword] = useState(false);
     const theme = useColorScheme() ?? 'light';
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
             <View style={styles.headerContainer}>
-                <Text style={[styles.headerText, { color: Colors[theme].text }]}>Forgot Password</Text>
+                <Text style={[styles.headerText, { color: Colors[theme].text }]}>Security Pin</Text>
             </View>
 
             <View style={[styles.contentContainer, { height: height * 0.76, backgroundColor: Colors[theme].secondary }]}>
                 <View style={styles.formContainer}>
-                    <ThemedText style={[styles.resetPasswordLabel, { color: theme == 'light' ? Colors.light.text : Colors.light.primary }]}>Reset Password?</ThemedText>
-                    <ThemedText style={[styles.resetPasswordText, { color: Colors[theme].text }]}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </ThemedText>
+                    <ThemedText style={[styles.enterSecurityPinLabel, { color: theme == 'light' ? Colors.light.text : Colors.light.primary }]}>Enter Security Pin</ThemedText>
 
-                    <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Enter Email Address</ThemedText>
-                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
-                        <TextInput
-                            placeholder="example@example.com"
-                            placeholderTextColor={Colors[theme].icon}
-                            style={[styles.input, { color: Colors[theme].text }]}
+                    <View>
+                        <OtpInput
+                            numberOfDigits={6}
+                            focusColor="green"
+                            autoFocus={false}
+                            hideStick={true}
+                            placeholder="******"
+                            blurOnFilled={true}
+                            disabled={false}
+                            type="numeric"
+                            secureTextEntry={false}
+                            focusStickBlinkingDuration={500}
+                            onFocus={() => console.log("Focused")}
+                            onBlur={() => console.log("Blurred")}
+                            onTextChange={(text) => console.log(text)}
+                            onFilled={(text) => console.log(`OTP is ${text}`)}
+                            textInputProps={{
+                                accessibilityLabel: "One-Time Password",
+                            }}
+                            textProps={{
+                                accessibilityRole: "text",
+                                accessibilityLabel: "OTP digit",
+                                allowFontScaling: false,
+                            }}
+                            theme={{
+                                containerStyle: { width: width / 1.4 },
+                                //     pinCodeContainerStyle: styles.pinCodeContainer,
+                                pinCodeTextStyle: { fontSize: 14 },
+                                //     focusStickStyle: styles.focusStick,
+                                //     focusedPinCodeContainerStyle: styles.activePinCodeContainer,
+                                //     placeholderTextStyle: styles.placeholderText,
+                                filledPinCodeContainerStyle: {
+                                    borderRadius: 100,
+                                    height: 40,
+                                    width: 40,
+                                    borderColor: Colors.light.primary,
+                                    borderWidth: 2,
+                                    marginVertical: spacingY._30
+                                },
+                                //     disabledPinCodeContainerStyle: styles.disabledPinCodeContainer,
+                            }}
                         />
                     </View>
 
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._35 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._35, marginBottom: spacingY._15 }}>
                         <CustomButton
-                            title="Next Step"
+                            title="Accept"
                             textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            onPress={() => router.push('/otpScreen')}
+                            onPress={() => console.log("clcked")}
                         />
                     </View>
 
-                    <View style={{ position: 'absolute', bottom: 70, width: '100%' }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: spacingY._10 }}>
-                            <CustomButton
-                                title="Sign Up"
-                                textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                                containerStyle={{ backgroundColor: Colors.light.secondaryBtn }}
-                                onPress={() => router.push('/signup')}
-                            />
-                        </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <CustomButton
+                            title="Send Again"
+                            textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
+                            containerStyle={{ backgroundColor: Colors.light.secondaryBtn }}
+                            onPress={() => router.push('/signup')}
+                        />
+                    </View>
 
+                    <View style={{ position: 'absolute', bottom: 70, width: '100%', alignItems: 'center' }}>
                         <View style={styles.orContainer}>
                             <ThemedText style={[styles.orText, { color: Colors[theme].text }]}>or sign up with</ThemedText>
                         </View>
@@ -79,7 +111,7 @@ const ForgotPasswordScreen = () => {
     );
 };
 
-export default ForgotPasswordScreen;
+export default OTPScreen;
 
 const styles = StyleSheet.create({
     headerContainer: {
@@ -99,16 +131,19 @@ const styles = StyleSheet.create({
         width: '100%',
         position: 'absolute',
         bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     formContainer: {
         flex: 1,
+        width: '100%',
     },
-    resetPasswordLabel: {
-        fontSize: 18,
+    enterSecurityPinLabel: {
+        fontSize: 16,
         fontWeight: '500',
         marginBottom: spacingY._5,
         marginTop: spacingY._10,
-        marginLeft: spacingX._5,
+        textAlign: 'center',
     },
     resetPasswordText: {
         fontSize: 10,

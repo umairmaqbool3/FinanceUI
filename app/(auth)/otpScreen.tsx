@@ -26,7 +26,7 @@ const OTPScreen = () => {
                 <View style={styles.formContainer}>
                     <ThemedText style={[styles.enterSecurityPinLabel, { color: theme == 'light' ? Colors.light.text : Colors.light.primary }]}>Enter Security Pin</ThemedText>
 
-                    <View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <OtpInput
                             numberOfDigits={6}
                             focusColor="green"
@@ -51,12 +51,12 @@ const OTPScreen = () => {
                                 allowFontScaling: false,
                             }}
                             theme={{
-                                containerStyle: { width: width / 1.4 },
+                                containerStyle: { width: width / 1.4, },
                                 //     pinCodeContainerStyle: styles.pinCodeContainer,
                                 pinCodeTextStyle: { fontSize: 14 },
                                 //     focusStickStyle: styles.focusStick,
                                 //     focusedPinCodeContainerStyle: styles.activePinCodeContainer,
-                                //     placeholderTextStyle: styles.placeholderText,
+                                placeholderTextStyle: { opacity: 0.3, fontSize: 24, marginTop: 8 },
                                 filledPinCodeContainerStyle: {
                                     borderRadius: 100,
                                     height: 40,
@@ -74,7 +74,7 @@ const OTPScreen = () => {
                         <CustomButton
                             title="Accept"
                             textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            onPress={() => console.log("clcked")}
+                            onPress={() => router.push('/changePassword')}
                         />
                     </View>
 

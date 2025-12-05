@@ -72,7 +72,9 @@ const LoginScreen = () => {
                     <View style={styles.fingerprintContainer}>
                         <ThemedText style={[styles.fingerprintText, { color: Colors[theme].text }]}>
                             Use{' '}
-                            <ThemedText style={[styles.fingerprintLink, { color: Colors[theme].focusText }]}>Fingerprint</ThemedText>
+                            <ThemedText
+                                onPress={() => router.push('/fingerprint')}
+                                style={[styles.fingerprintLink, { color: Colors[theme].focusText }]}>Fingerprint</ThemedText>
                             {' '}To Access
                         </ThemedText>
                     </View>

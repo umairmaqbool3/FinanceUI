@@ -1,3 +1,4 @@
+import DotInCircle from '@/assets/svgs/DotInCircle';
 import CustomButton from '@/components/CustomButton';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
@@ -14,54 +15,72 @@ const ChangePasswordScreen = () => {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const theme = useColorScheme() ?? 'light';
+    const [passordChangedSuccessfully, setPassordChangedSuccessfully] = useState(false);
 
+    const handlePasswordChange = () => {
+        setPassordChangedSuccessfully(true);
+        setTimeout(() => {
+            setPassordChangedSuccessfully(false);
+            router.push('/login');
+        }, 1500);
+    };
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
-            <View style={styles.headerContainer}>
-                <Text style={[styles.headerText, { color: Colors[theme].text }]}>New Password</Text>
-            </View>
-
-            <View style={[styles.contentContainer, { height: height * 0.76, backgroundColor: Colors[theme].secondary }]}>
-                <View style={styles.formContainer}>
-
-                    <ThemedText style={[styles.label, { color: Colors[theme].text }]}>New Password</ThemedText>
-                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
-                        <TextInput
-                            placeholder="● ● ● ● ● ● ● ●"
-                            placeholderTextColor={Colors.dark.primary}
-                            secureTextEntry={!showPassword}
-                            style={[styles.input, { color: Colors[theme].text, opacity: 0.3 }]}
-                        />
-                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-                            <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
-                        </TouchableOpacity>
-                    </View>
-
-                    <ThemedText style={[styles.label, { color: Colors[theme].text, marginTop: spacingY._30 }]}>Confirm New Password</ThemedText>
-                    <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
-                        <TextInput
-                            placeholder="● ● ● ● ● ● ● ●"
-                            placeholderTextColor={Colors.dark.primary}
-                            secureTextEntry={!showPassword}
-                            style={[styles.input, { color: Colors[theme].text, opacity: 0.3 }]}
-                        />
-                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-                            <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._60 }}>
-                        <CustomButton
-                            title="Change Password"
-                            textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            width={width / 1.2}
-                            onPress={() => router.push('/otpScreen')}
-                        />
-                    </View>
-
-
+            {passordChangedSuccessfully ? (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <DotInCircle color={Colors.light.secondaryBtn} />
+                    <ThemedText style={[styles.successText]}>Password Has Been {'\n'}Changed Successfully</ThemedText>
                 </View>
-            </View>
+            ) : (
+                <>
+                    <View style={styles.headerContainer}>
+                        <Text style={[styles.headerText, { color: Colors[theme].text }]}>New Password</Text>
+                    </View>
+
+                    <View style={[styles.contentContainer, { height: height * 0.76, backgroundColor: Colors[theme].secondary }]}>
+                        <View style={styles.formContainer}>
+
+                            <ThemedText style={[styles.label, { color: Colors[theme].text }]}>New Password</ThemedText>
+                            <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                                <TextInput
+                                    placeholder="● ● ● ● ● ● ● ●"
+                                    placeholderTextColor={Colors.dark.primary}
+                                    secureTextEntry={!showPassword}
+                                    style={[styles.input, { color: Colors[theme].text, opacity: 0.3 }]}
+                                />
+                                <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+                                    <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
+                                </TouchableOpacity>
+                            </View>
+
+                            <ThemedText style={[styles.label, { color: Colors[theme].text, marginTop: spacingY._30 }]}>Confirm New Password</ThemedText>
+                            <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+                                <TextInput
+                                    placeholder="● ● ● ● ● ● ● ●"
+                                    placeholderTextColor={Colors.dark.primary}
+                                    secureTextEntry={!showPassword}
+                                    style={[styles.input, { color: Colors[theme].text, opacity: 0.3 }]}
+                                />
+                                <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+                                    <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors[theme].icon} />
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._60 }}>
+                                <CustomButton
+                                    title="Change Password"
+                                    textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
+                                    width={width / 1.2}
+                                    onPress={() => handlePasswordChange()}
+                                />
+                            </View>
+
+
+                        </View>
+                    </View>
+                </>
+            )}
+
         </Screen>
     );
 };
@@ -180,5 +199,12 @@ const styles = StyleSheet.create({
     signUpLink: {
         fontWeight: '400',
         fontSize: 13,
+    },
+    successText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: Colors.light.secondaryBtn,
+        marginTop: spacingY._20,
     },
 });

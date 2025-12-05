@@ -53,7 +53,7 @@ const OTPScreen = () => {
                             theme={{
                                 containerStyle: { width: width / 1.4, },
                                 //     pinCodeContainerStyle: styles.pinCodeContainer,
-                                pinCodeTextStyle: { fontSize: 14 },
+                                pinCodeTextStyle: { fontSize: 14, color: Colors[theme].text },
                                 //     focusStickStyle: styles.focusStick,
                                 //     focusedPinCodeContainerStyle: styles.activePinCodeContainer,
                                 placeholderTextStyle: { opacity: 0.3, fontSize: 24, marginTop: 8 },

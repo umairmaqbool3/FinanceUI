@@ -52,7 +52,7 @@ const LoginScreen = () => {
                         <CustomButton
                             title="Log In"
                             textStyle={{ color: 'black', fontSize: 16, fontWeight: '600' }}
-                            onPress={() => console.log("clcked")}
+                            onPress={() => router.replace('/(tabs)')}
                         />
                     </View>
 

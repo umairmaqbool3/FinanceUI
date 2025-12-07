@@ -13,6 +13,7 @@ export default function TabLayout() {
         <Tabs
             screenOptions={{
                 headerShown: false,
+                tabBarShowLabel: false,
                 tabBarStyle: {
                     backgroundColor: Colors[theme].secondaryBtn,
                     borderTopWidth: 0,
@@ -30,6 +31,24 @@ export default function TabLayout() {
                     title: 'Home',
                     tabBarIcon: ({ color, focused }) => (
                         <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="search"
+                options={{
+                    title: 'Search',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'person' : 'person-outline'} size={24} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="transaction"
+                options={{
+                    title: 'Transaction',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'person' : 'person-outline'} size={24} color={color} />
                     ),
                 }}
             />

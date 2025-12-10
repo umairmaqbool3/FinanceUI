@@ -19,10 +19,10 @@ export default function TabLayout() {
                         backgroundColor: Colors[theme].secondaryBtn,
                         borderTopWidth: 0,
                         elevation: 0,
-                        height: Platform.OS === 'ios' ? 88 : 60,
-                        paddingBottom: Platform.OS === 'ios' ? 24 : 10,
+                        height: Platform.OS === 'ios' ? 95 : 60,
+                        paddingBottom: Platform.OS === 'ios' ? 20 : 10,
                         borderRadius: 60,
-                        paddingTop: 12
+                        paddingTop: 14
                     },
                     tabBarActiveTintColor: Colors[theme].primary,
                     tabBarInactiveTintColor: Colors[theme].icon,

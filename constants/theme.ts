@@ -21,11 +21,13 @@ export const Colors = {
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
     focusText: '#007AFF',
+    tabbarBg: '#dff7e2',
   },
   dark: {
     primary: '#052224',
     secondary: '#0E3E3E',
     secondaryBtn: '#dff7e2',
+    tabbarBg: '#093030',
     text: '#dff7e2',
     background: '#151718',
     white: '#fff',

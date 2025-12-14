@@ -1,3 +1,4 @@
+import BalanceComponent from '@/components/BalanceComponent';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
@@ -15,6 +16,7 @@ const HomeScreen = () => {
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
+            {/* Header */}
             <View style={styles.headerContainer}>
                 <View>
                     <ThemedText style={{ fontSize: 18, fontWeight: '500' }} type='title'>Hi, Welcome Back</ThemedText>
@@ -23,6 +25,10 @@ const HomeScreen = () => {
                 <View style={styles.iconContainer}>
                     <Ionicons name="notifications-outline" size={20} />
                 </View>
+            </View>
+
+            <View>
+                <BalanceComponent />
             </View>
 
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>

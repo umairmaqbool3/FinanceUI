@@ -2,7 +2,7 @@ import CheckIcon from '@/assets/svgs/CheckIcon'
 import ExpenseIcon from '@/assets/svgs/ExpenseIcon'
 import IncomeIcon from '@/assets/svgs/IncomeIcon'
 import { Colors } from '@/constants/theme'
-import { spacingX } from '@/constants/theme1'
+import { spacingX, spacingY } from '@/constants/theme1'
 import { useColorScheme } from '@/hooks/use-color-scheme'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -15,23 +15,31 @@ const BalanceComponent = () => {
         <View style={styles.container}>
             <View style={[styles.row]}>
                 <View>
-                    <View style={[styles.row]}>
+                    <View style={[styles.rowStart]}>
                         <IncomeIcon theme={theme} />
-                        <ThemedText style={{ fontSize: 13, fontWeight: '400' }} type='default'>Total Balance</ThemedText>
+                        <ThemedText style={{ fontSize: 12, fontWeight: '400' }} type='default'>Total Balance</ThemedText>
                     </View>
-                    <ThemedText style={{ fontSize: 20, fontWeight: '800' }} type='defaultSemiBold'>$7,783.00</ThemedText>
+                    <ThemedText style={{ fontSize: 22, fontWeight: '800', color: Colors.light.secondary }} type='defaultSemiBold'>$7,783.00</ThemedText>
                 </View>
-                <View></View>
+                <View style={{ height: '90%', width: 1, backgroundColor: Colors.light.secondary }} />
                 <View>
-                    <View style={[styles.row]}>
+                    <View style={[styles.rowStart]}>
                         <ExpenseIcon theme={theme} />
-                        <ThemedText style={{ fontSize: 13, fontWeight: '400' }} type='default'>Total Expense</ThemedText>
+                        <ThemedText style={{ fontSize: 12, fontWeight: '400' }} type='default'>Total Expense</ThemedText>
                     </View>
-                    <ThemedText style={{ fontSize: 20, fontWeight: '800', color: Colors.light.focusText }} type='defaultSemiBold'>-$1.187.40</ThemedText>
+                    <ThemedText style={{ fontSize: 22, fontWeight: '800', color: Colors.light.focusText }} type='defaultSemiBold'>-$1.187.40</ThemedText>
                 </View>
             </View>
-            <View>
-                <ThemedText>Show progress bar here</ThemedText>
+            <View style={styles.bar}>
+                <View style={{
+                    height: 25,
+                    width: '100%',
+                    backgroundColor: Colors.light.text,
+                    borderRadius: 20,
+                }}
+                >
+
+                </View>
             </View>
             <View style={[styles.rowStart]}>
                 <CheckIcon theme={theme} />
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: spacingX._10,
+        gap: spacingX._7,
     },
     rowStart: {
         flexDirection: 'row',
@@ -60,4 +68,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: spacingX._10,
     },
+    bar: {
+        marginVertical: spacingY._7,
+    }
 })

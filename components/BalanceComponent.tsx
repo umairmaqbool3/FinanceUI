@@ -5,7 +5,7 @@ import { Colors } from '@/constants/theme'
 import { spacingX, spacingY } from '@/constants/theme1'
 import { useColorScheme } from '@/hooks/use-color-scheme'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { ThemedText } from './themed-text'
 
 const BalanceComponent = () => {
@@ -31,14 +31,21 @@ const BalanceComponent = () => {
                 </View>
             </View>
             <View style={styles.bar}>
-                <View style={{
-                    height: 25,
-                    width: '100%',
-                    backgroundColor: Colors.light.text,
-                    borderRadius: 20,
-                }}
+                <View style={styles.barBlack}
                 >
-
+                    <Text style={{ color: Colors.light.secondaryBtn, marginLeft: spacingX._20 }}>30%</Text>
+                    <View style={styles.barSecondary}>
+                        <Text
+                            style={{
+                                color: Colors.light.text,
+                                textAlign: 'right',
+                                marginRight: spacingX._20,
+                                fontStyle: 'italic',
+                            }}
+                        >
+                            $20,000.00
+                        </Text>
+                    </View>
                 </View>
             </View>
             <View style={[styles.rowStart]}>
@@ -69,6 +76,23 @@ const styles = StyleSheet.create({
         gap: spacingX._10,
     },
     bar: {
-        marginVertical: spacingY._7,
+        marginVertical: spacingY._10,
+        marginHorizontal: -spacingX._10,
+    },
+    barBlack: {
+        height: 22,
+        width: '100%',
+        backgroundColor: Colors.light.text,
+        borderRadius: 20,
+        justifyContent: 'center',
+    },
+    barSecondary: {
+        height: 22,
+        width: '75%',
+        backgroundColor: Colors.light.secondaryBtn,
+        borderRadius: 20,
+        justifyContent: 'center',
+        position: 'absolute',
+        right: 0,
     }
 })

@@ -27,9 +27,7 @@ const HomeScreen = () => {
                 </View>
             </View>
 
-            <View>
-                <BalanceComponent />
-            </View>
+            <BalanceComponent />
 
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
 

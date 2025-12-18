@@ -1,4 +1,5 @@
 import BalanceComponent from '@/components/BalanceComponent';
+import SavingsOnGoals from '@/components/SavingsOnGoals';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
@@ -30,7 +31,7 @@ const HomeScreen = () => {
             <BalanceComponent />
 
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
-
+                <SavingsOnGoals />
             </View>
         </Screen>
     );

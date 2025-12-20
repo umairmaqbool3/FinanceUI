@@ -1,4 +1,6 @@
 import CarIcon from '@/assets/svgs/CarIcon'
+import FoodIcon from '@/assets/svgs/FoodIcon'
+import SalaryIcon from '@/assets/svgs/SalaryIcon'
 import { Colors } from '@/constants/theme'
 import { spacingX } from '@/constants/theme1'
 import React from 'react'
@@ -23,7 +25,25 @@ const SavingsOnGoals = () => {
                         <CarIcon />
                     </View>
                 </View>
-                <Text>SavingsOnGoals</Text>
+                <Text style={{ textAlign: 'center', marginTop: 5 }}>{'Savings \nOn Goals'}</Text>
+            </View>
+            <View style={{ height: '90%', width: 2, backgroundColor: Colors.light.white }} />
+            <View style={{ flexDirection: 'column', justifyContent: 'center', gap: spacingX._15 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacingX._10 }}>
+                    <SalaryIcon />
+                    <View>
+                        <Text style={{ fontWeight: '200', fontSize: 13 }}> Revenue Last Week</Text>
+                        <Text style={{ fontWeight: '700', fontSize: 16 }}> $4.000.00</Text>
+                    </View>
+                </View>
+                <View style={{ height: 2, width: '95%', backgroundColor: Colors.light.white }} />
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacingX._10 }}>
+                    <FoodIcon />
+                    <View style={{ marginLeft: 8 }}>
+                        <Text style={{ fontWeight: '200', fontSize: 13 }}> Revenue Last Week</Text>
+                        <Text style={{ fontWeight: '700', fontSize: 16, color: Colors.light.focusText }}> -$100.00</Text>
+                    </View>
+                </View>
             </View>
         </View>
     )
@@ -38,6 +58,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: spacingX._20,
         flexDirection: 'row',
+        gap: spacingX._20,
     },
     wrapper: {
         width: SIZE,

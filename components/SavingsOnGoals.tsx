@@ -27,21 +27,21 @@ const SavingsOnGoals = () => {
                 </View>
                 <Text style={{ textAlign: 'center', marginTop: 5 }}>{'Savings \nOn Goals'}</Text>
             </View>
-            <View style={{ height: '90%', width: 2, backgroundColor: Colors.light.white }} />
+            <View style={styles.verticalDivider} />
             <View style={{ flexDirection: 'column', justifyContent: 'center', gap: spacingX._15 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacingX._10 }}>
+                <View style={styles.lastWeekTextView}>
                     <SalaryIcon />
-                    <View>
-                        <Text style={{ fontWeight: '200', fontSize: 13 }}> Revenue Last Week</Text>
-                        <Text style={{ fontWeight: '700', fontSize: 16 }}> $4.000.00</Text>
+                    <View style={{ gap: 5 }}>
+                        <Text style={styles.text}> Revenue Last Week</Text>
+                        <Text style={styles.priceText}> $4.000.00</Text>
                     </View>
                 </View>
-                <View style={{ height: 2, width: '95%', backgroundColor: Colors.light.white }} />
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacingX._10 }}>
+                <View style={styles.horizontalDivider} />
+                <View style={[styles.lastWeekTextView, { marginLeft: 3 }]}>
                     <FoodIcon />
-                    <View style={{ marginLeft: 8 }}>
-                        <Text style={{ fontWeight: '200', fontSize: 13 }}> Revenue Last Week</Text>
-                        <Text style={{ fontWeight: '700', fontSize: 16, color: Colors.light.focusText }}> -$100.00</Text>
+                    <View style={{ marginLeft: 8, gap: 3 }}>
+                        <Text style={styles.text}> Food Last Week</Text>
+                        <Text style={[styles.priceText, { color: Colors.light.focusText }]}> -$100.00</Text>
                     </View>
                 </View>
             </View>
@@ -97,4 +97,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'transparent',
     },
+    lastWeekTextView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: spacingX._10
+    },
+    text: {
+        fontWeight: '200',
+        fontSize: 13
+    },
+    priceText: {
+        fontWeight: '500',
+        fontSize: 16
+    },
+    horizontalDivider: {
+        height: 2,
+        width: '100%',
+        backgroundColor: Colors.light.white
+    },
+    verticalDivider: {
+        height: '100%',
+        width: 2,
+        backgroundColor: Colors.light.white
+    }
 })

@@ -1,4 +1,5 @@
 import BalanceComponent from '@/components/BalanceComponent';
+import PeriodSelector from '@/components/PeriodSelector';
 import SavingsOnGoals from '@/components/SavingsOnGoals';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
@@ -7,13 +8,14 @@ import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 
 const HomeScreen = () => {
     const { width, height } = useWindowDimensions();
     const router = useRouter();
     const theme = useColorScheme() ?? 'light';
+    const [selectedPeriod, setSelectedPeriod] = useState('Weekly');
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -32,6 +34,12 @@ const HomeScreen = () => {
 
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
                 <SavingsOnGoals />
+
+                <PeriodSelector
+                    options={['Daily', 'Weekly', 'Monthly']}
+                    selected={selectedPeriod}
+                    onSelect={setSelectedPeriod}
+                />
             </View>
         </Screen>
     );

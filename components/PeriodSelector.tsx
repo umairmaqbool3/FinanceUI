@@ -1,5 +1,6 @@
 import { Colors } from '@/constants/theme';
-import { spacingX, spacingY } from '@/constants/theme1';
+import { spacingY } from '@/constants/theme1';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -10,8 +11,9 @@ interface PeriodSelectorProps {
 }
 
 const PeriodSelector = ({ options, selected, onSelect }: PeriodSelectorProps) => {
+    const theme = useColorScheme() ?? 'light';
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: Colors[theme].tabbarBg }]}>
             {options.map((option) => {
                 const isSelected = selected === option;
                 return (
@@ -43,24 +45,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.2)', // Semi-transparent background
-        borderRadius: 30,
+        borderRadius: 15,
         padding: 4,
-        marginHorizontal: spacingX._20,
-        marginVertical: spacingY._10,
+        marginVertical: spacingY._15,
         alignSelf: 'center',
+        height: spacingY._50
     },
     tab: {
         paddingVertical: 8,
-        paddingHorizontal: 20,
-        borderRadius: 20,
+        paddingHorizontal: 30,
+        borderRadius: 15,
     },
     activeTab: {
-        backgroundColor: Colors.light.white,
+        backgroundColor: Colors.light.primary,
     },
     text: {
         fontSize: 14,
-        fontWeight: '600',
+        fontWeight: '400',
     },
     activeText: {
         color: Colors.light.text,

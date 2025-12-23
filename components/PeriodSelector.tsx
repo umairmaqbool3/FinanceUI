@@ -1,5 +1,5 @@
 import { Colors } from '@/constants/theme';
-import { spacingY } from '@/constants/theme1';
+import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -27,7 +27,8 @@ const PeriodSelector = ({ options, selected, onSelect }: PeriodSelectorProps) =>
                     >
                         <Text style={[
                             styles.text,
-                            isSelected ? styles.activeText : styles.inactiveText
+                            { color: theme === 'light' ? Colors.light.text : Colors.light.white },
+                            isSelected ? styles.activeText : styles.inactiveText,
                         ]}>
                             {option}
                         </Text>
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
         padding: 4,
         marginVertical: spacingY._15,
         alignSelf: 'center',
-        height: spacingY._50
+        height: spacingY._50,
+        paddingHorizontal: spacingX._10,
     },
     tab: {
         paddingVertical: 8,
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
         color: Colors.light.text,
     },
     inactiveText: {
-        color: Colors.light.white, // Assuming dark theme background context broadly
         opacity: 0.8,
     },
 });

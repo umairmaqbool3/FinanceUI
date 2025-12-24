@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: spacingX._10,
     },
     tab: {
-        paddingVertical: 8,
+        paddingVertical: 12,
         paddingHorizontal: 30,
         borderRadius: 15,
     },

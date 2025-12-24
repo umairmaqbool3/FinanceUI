@@ -36,7 +36,7 @@ const HomeScreen = () => {
                 <SavingsOnGoals />
 
                 <PeriodSelector
-                    options={['Daily', 'Weekly', 'Monthly']}
+                    options={['Daily ', 'Weekly', 'Monthly']}
                     selected={selectedPeriod}
                     onSelect={setSelectedPeriod}
                 />

@@ -1,7 +1,7 @@
 import BalanceComponent from '@/components/BalanceComponent';
-import PeriodSelector from '@/components/PeriodSelector';
 import SavingsOnGoals from '@/components/SavingsOnGoals';
 import Screen from '@/components/Screen';
+import { SegmentedControl } from '@/components/SegmentedControl';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
@@ -15,7 +15,7 @@ const HomeScreen = () => {
     const { width, height } = useWindowDimensions();
     const router = useRouter();
     const theme = useColorScheme() ?? 'light';
-    const [selectedPeriod, setSelectedPeriod] = useState('Weekly');
+    const [selectedPeriod, setSelectedPeriod] = useState({ name: 'Weekly', icon: '' });
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -35,10 +35,18 @@ const HomeScreen = () => {
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
                 <SavingsOnGoals />
 
-                <PeriodSelector
+                {/* <PeriodSelector
                     options={['Daily ', 'Weekly', 'Monthly']}
                     selected={selectedPeriod}
                     onSelect={setSelectedPeriod}
+                /> */}
+
+                <SegmentedControl
+                    data={[{ name: 'Daily ', icon: '' }, { name: 'Weekly', icon: '' }, { name: 'Monthly', icon: '' }]}
+                    onPress={item => setSelectedPeriod(item)}
+                    selected={selectedPeriod}
+                    width={width - 40}
+                    height={50}
                 />
             </View>
         </Screen>

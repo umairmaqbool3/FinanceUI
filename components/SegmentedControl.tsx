@@ -157,7 +157,7 @@ function SegmentedControl<T extends { name: string; icon: string }>({
                             size={13}
                             style={rLabelStyle}
                         /> */}
-                        <Animated.Text style={[localStyles.difficultyLabel, rLabelStyle]}>
+                        <Animated.Text style={[localStyles.difficultyLabel, rLabelStyle, { color: Colors[theme].text }]}>
                             {item.name}
                         </Animated.Text>
                         <AnimatedBlurView
@@ -219,8 +219,6 @@ const localStyles = StyleSheet.create({
     },
     difficultyLabel: {
         fontSize: 14,
-        fontFamily: 'Honk-Regular',
-        color: Palette.baseGray80,
         textAlign: 'center',
     },
     highlightedCellBlurContent: {

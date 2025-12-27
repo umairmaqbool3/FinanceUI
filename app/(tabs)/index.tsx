@@ -35,12 +35,6 @@ const HomeScreen = () => {
             <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
                 <SavingsOnGoals />
 
-                {/* <PeriodSelector
-                    options={['Daily ', 'Weekly', 'Monthly']}
-                    selected={selectedPeriod}
-                    onSelect={setSelectedPeriod}
-                /> */}
-
                 <SegmentedControl
                     data={[{ name: 'Daily ', icon: '' }, { name: 'Weekly', icon: '' }, { name: 'Monthly', icon: '' }]}
                     onPress={item => setSelectedPeriod(item)}
@@ -48,6 +42,9 @@ const HomeScreen = () => {
                     width={width - 40}
                     height={50}
                 />
+                <View>
+
+                </View>
             </View>
         </Screen>
     );

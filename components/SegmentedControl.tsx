@@ -232,9 +232,9 @@ const localStyles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: Colors.light.primary,
         borderRadius: 30,
-        shadowOpacity: 0.1,
-        shadowOffset: { height: 1, width: 0 },
-        shadowRadius: 2,
+        // shadowOpacity: 0.1,
+        // shadowOffset: { height: 1, width: 0 },
+        // shadowRadius: 2,
     },
     labelContainer: {
         flex: 1,

@@ -3,6 +3,7 @@ import SavingsOnGoals from '@/components/SavingsOnGoals';
 import Screen from '@/components/Screen';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { ThemedText } from '@/components/themed-text';
+import { data } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -39,11 +40,23 @@ const HomeScreen = () => {
                     data={[{ name: 'Daily ', icon: '' }, { name: 'Weekly', icon: '' }, { name: 'Monthly', icon: '' }]}
                     onPress={item => setSelectedPeriod(item)}
                     selected={selectedPeriod}
-                    width={width - 40}
-                    height={50}
+                    width={width - 55}
+                    height={55}
                 />
                 <View>
-
+                    {data.map((item, index) => (
+                        <View key={index} style={[styles.singleItemContainer]}>
+                            <View style={[styles.iconBackgroundView, { backgroundColor: index == 0 ? '#6DB6FE' : index == 1 ? '#3299FF' : Colors.light.focusText }]}>
+                                <item.icon color={Colors.light.white} width={25} height={25} />
+                            </View>
+                            <View>
+                                <ThemedText>{item.title}</ThemedText>
+                                <ThemedText>{item.date}</ThemedText>
+                            </View>
+                            <ThemedText>{item.duration}</ThemedText>
+                            <ThemedText>{item.amount}</ThemedText>
+                        </View>
+                    ))}
                 </View>
             </View>
         </Screen>
@@ -77,5 +90,15 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.secondaryBtn,
         padding: spacingX._5,
         borderRadius: 50,
-    }
+    },
+    singleItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: spacingY._15,
+    },
+    iconBackgroundView: {
+        padding: spacingX._12,
+        borderRadius: 20,
+    },
 });

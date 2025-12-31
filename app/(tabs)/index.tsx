@@ -53,7 +53,9 @@ const HomeScreen = () => {
                                 <ThemedText>{item.title}</ThemedText>
                                 <ThemedText>{item.date}</ThemedText>
                             </View>
+                            <View style={styles.verticalDivider} />
                             <ThemedText>{item.duration}</ThemedText>
+                            <View style={styles.verticalDivider} />
                             <ThemedText>{item.amount}</ThemedText>
                         </View>
                     ))}
@@ -100,5 +102,10 @@ const styles = StyleSheet.create({
     iconBackgroundView: {
         padding: spacingX._12,
         borderRadius: 20,
+    },
+    verticalDivider: {
+        width: 1,
+        height: '75%',
+        backgroundColor: Colors.light.primary,
     },
 });

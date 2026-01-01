@@ -46,12 +46,15 @@ const HomeScreen = () => {
                 <View>
                     {data.map((item, index) => (
                         <View key={index} style={[styles.singleItemContainer]}>
-                            <View style={[styles.iconBackgroundView, { backgroundColor: index == 0 ? '#6DB6FE' : index == 1 ? '#3299FF' : Colors.light.focusText }]}>
+                            <View style={[styles.iconBackgroundView, {
+                                backgroundColor: index == 0 ? '#6DB6FE' : index == 1 ? '#3299FF' : Colors.light.focusText,
+                                opacity: index == 0 || index == 1 ? 0.9 : 1
+                            }]}>
                                 <item.icon color={Colors.light.white} width={25} height={25} />
                             </View>
                             <View>
                                 <ThemedText>{item.title}</ThemedText>
-                                <ThemedText>{item.date}</ThemedText>
+                                <ThemedText style={{ fontSize: 12, color: Colors.light.focusText }}>{item.date}</ThemedText>
                             </View>
                             <View style={styles.verticalDivider} />
                             <ThemedText>{item.duration}</ThemedText>

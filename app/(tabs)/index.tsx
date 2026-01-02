@@ -57,9 +57,9 @@ const HomeScreen = () => {
                                 <ThemedText style={{ fontSize: 12, color: Colors.light.focusText }}>{item.date}</ThemedText>
                             </View>
                             <View style={styles.verticalDivider} />
-                            <ThemedText>{item.duration}</ThemedText>
+                            <ThemedText style={{ fontSize: 13 }}>{item.duration}</ThemedText>
                             <View style={styles.verticalDivider} />
-                            <ThemedText>{item.amount}</ThemedText>
+                            <ThemedText style={{ color: Number(item?.amount) < 0 ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
                         </View>
                     ))}
                 </View>

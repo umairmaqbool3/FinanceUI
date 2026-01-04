@@ -48,7 +48,7 @@ function SegmentedControl<T extends { name: string; icon: string }>({
     height,
 }: SegmentedControlProps<T>) {
     // Internal padding for spacing between elements
-    const internalPadding = 5;
+    const internalPadding = 6;
     const theme = useColorScheme() ?? 'light';
     // Calculate the width of each cell background based on the number of items
     const cellBackgroundWidth = width / data.length;
@@ -56,7 +56,7 @@ function SegmentedControl<T extends { name: string; icon: string }>({
 
     // Find the index of the selected item in the data array
     const selectedCellIndex = useMemo(
-        () => data.findIndex(item => item === selected),
+        () => data.findIndex(item => item.name === selected.name),
         [data, selected],
     );
 

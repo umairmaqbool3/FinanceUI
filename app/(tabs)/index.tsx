@@ -16,7 +16,7 @@ const HomeScreen = () => {
     const { width, height } = useWindowDimensions();
     const router = useRouter();
     const theme = useColorScheme() ?? 'light';
-    const [selectedPeriod, setSelectedPeriod] = useState({ name: 'Weekly', icon: '' });
+    const [selectedPeriod, setSelectedPeriod] = useState({ name: 'Daily ', icon: '' });
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -52,14 +52,18 @@ const HomeScreen = () => {
                             }]}>
                                 <item.icon color={Colors.light.white} width={25} height={25} />
                             </View>
-                            <View>
+                            <View style={{ flex: 1, paddingHorizontal: 10 }}>
                                 <ThemedText>{item.title}</ThemedText>
-                                <ThemedText style={{ fontSize: 12, color: Colors.light.focusText }}>{item.date}</ThemedText>
+                                <ThemedText style={{ fontSize: 12, color: Colors.light.focusText, fontWeight: '700' }}>{item.date}</ThemedText>
                             </View>
                             <View style={styles.verticalDivider} />
-                            <ThemedText style={{ fontSize: 13 }}>{item.duration}</ThemedText>
+                            <View style={{ width: 85, alignItems: 'center' }}>
+                                <ThemedText style={{ fontSize: 13 }}>{item.duration}</ThemedText>
+                            </View>
                             <View style={styles.verticalDivider} />
-                            <ThemedText style={{ color: Number(item?.amount) < 0 ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
+                            <View style={{ width: 75, alignItems: 'flex-end' }}>
+                                <ThemedText style={{ color: Number(item?.amount) < 0 ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
+                            </View>
                         </View>
                     ))}
                 </View>
@@ -99,7 +103,6 @@ const styles = StyleSheet.create({
     singleItemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         marginBottom: spacingY._15,
     },
     iconBackgroundView: {
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     },
     verticalDivider: {
         width: 1,
-        height: '75%',
+        height: '70%',
         backgroundColor: Colors.light.primary,
     },
 });

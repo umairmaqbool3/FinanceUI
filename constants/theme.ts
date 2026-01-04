@@ -25,9 +25,9 @@ export const Colors = {
   },
   dark: {
     primary: '#052224',
-    secondary: '#0E3E3E',
+    secondary: '#093030',
     secondaryBtn: '#dff7e2',
-    tabbarBg: '#093030',
+    tabbarBg: '#0E3E3E',
     text: '#dff7e2',
     background: '#151718',
     white: '#fff',

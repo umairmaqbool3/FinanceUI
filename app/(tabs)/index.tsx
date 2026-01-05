@@ -62,7 +62,7 @@ const HomeScreen = () => {
                             </View>
                             <View style={styles.verticalDivider} />
                             <View style={{ width: 75, alignItems: 'flex-end' }}>
-                                <ThemedText style={{ color: Number(item?.amount) < 0 ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
+                                <ThemedText style={{ color: item?.amount.startsWith("-") ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
                             </View>
                         </View>
                     ))}

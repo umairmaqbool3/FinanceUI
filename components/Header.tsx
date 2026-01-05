@@ -1,3 +1,5 @@
+
+import { Colors } from '@/constants/theme';
 import React from 'react';
 import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 
@@ -8,6 +10,7 @@ interface HeaderProps {
     onLeftPress?: () => void;
     onRightPress?: () => void;
     style?: StyleProp<ViewStyle>;
+    theme: string
 }
 
 // How to use this component
@@ -25,7 +28,8 @@ const Header: React.FC<HeaderProps> = ({
     rightIcon,
     onLeftPress,
     onRightPress,
-    style
+    style,
+    theme
 }) => {
     return (
         <View style={[styles.container, style]}>
@@ -38,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
             </View>
 
             <View style={styles.centerContainer}>
-                {title && <Text style={styles.title}>{title}</Text>}
+                {title && <Text style={[styles.title, { color: Colors[theme].text }]}>{title}</Text>}
             </View>
 
             <View style={styles.rightContainer}>

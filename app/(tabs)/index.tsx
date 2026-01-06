@@ -10,7 +10,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Platform, StyleSheet, View, useWindowDimensions } from 'react-native';
 
 const HomeScreen = () => {
     const { width, height } = useWindowDimensions();
@@ -33,7 +33,7 @@ const HomeScreen = () => {
 
             <BalanceComponent />
 
-            <View style={[styles.contentContainer, { height: height * 0.55, backgroundColor: Colors[theme].secondary }]}>
+            <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.55 : 0.61), backgroundColor: Colors[theme].secondary }]}>
                 <SavingsOnGoals />
 
                 <SegmentedControl

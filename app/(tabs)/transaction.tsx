@@ -1,12 +1,15 @@
+import BalanceComponent from '@/components/BalanceComponent';
+import ExpenseListItem from '@/components/ExpenseListItem';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
+import { data2 } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Platform, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 const TransactionScreen = () => {
     const theme = useColorScheme() ?? 'light';
@@ -24,8 +27,19 @@ const TransactionScreen = () => {
                 onRightPress={() => console.log('Notifications/Right pressed')}
             />
 
-            <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.55 : 0.55), backgroundColor: Colors[theme].secondary }]}>
+            <View style={styles.balanceContainer}>
+                <Text style={styles.totalBalance}>Total Balance</Text>
+                <Text style={styles.totalAmount}>$7,783.00</Text>
+            </View>
 
+            <BalanceComponent />
+
+            <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.52 : 0.52), backgroundColor: Colors[theme].secondary }]}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    {data2.map((item, index) => (
+                        <ExpenseListItem key={index} item={item} index={index} />
+                    ))}
+                </ScrollView>
             </View>
 
         </Screen>
@@ -44,4 +58,25 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
     },
+    balanceContainer: {
+        backgroundColor: Colors.light.secondary,
+        marginHorizontal: spacingX._30,
+        marginTop: spacingY._10,
+        marginBottom: -spacingY._30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 12,
+        paddingVertical: spacingY._10,
+    },
+    totalBalance: {
+        fontSize: 12,
+        fontWeight: '400',
+        color: Colors.light.text,
+    },
+    totalAmount: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.light.text,
+        marginTop: 5
+    }
 });

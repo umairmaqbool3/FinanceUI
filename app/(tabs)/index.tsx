@@ -11,7 +11,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Platform, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
 const HomeScreen = () => {
     const { width, height } = useWindowDimensions();
@@ -44,11 +44,11 @@ const HomeScreen = () => {
                     width={width - 55}
                     height={55}
                 />
-                <View>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     {data.map((item, index) => (
                         <ExpenseListItem key={index} item={item} index={index} />
                     ))}
-                </View>
+                </ScrollView>
             </View>
         </Screen>
     );

@@ -2,7 +2,8 @@ import BalanceComponent from '@/components/BalanceComponent';
 import ExpenseListItem from '@/components/ExpenseListItem';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
-import { data2 } from '@/constants/data';
+import { ThemedText } from '@/components/themed-text';
+import { data, data2 } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -22,9 +23,14 @@ const TransactionScreen = () => {
                 title="Transaction"
                 theme={theme}
                 leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
-                rightIcon={<Ionicons name="notifications-outline" size={24} color={Colors[theme].text} />}
+                rightIcon={<View style={styles.iconContainer}>
+                    <Ionicons name="notifications-outline" size={20} />
+                </View>}
                 onLeftPress={() => router.replace('/(tabs)')}
                 onRightPress={() => console.log('Notifications/Right pressed')}
+                style={{
+                    marginHorizontal: spacingX._12,
+                }}
             />
 
             <View style={styles.balanceContainer}>
@@ -36,6 +42,11 @@ const TransactionScreen = () => {
 
             <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.52 : 0.52), backgroundColor: Colors[theme].secondary }]}>
                 <ScrollView showsVerticalScrollIndicator={false}>
+                    <ThemedText style={{ fontSize: 16, fontWeight: '600', marginBottom: spacingY._15 }}>April</ThemedText>
+                    {data.map((item, index) => (
+                        <ExpenseListItem key={index} item={item} index={index} />
+                    ))}
+                    <ThemedText style={{ fontSize: 16, fontWeight: '600', marginVertical: spacingY._10 }}>March</ThemedText>
                     {data2.map((item, index) => (
                         <ExpenseListItem key={index} item={item} index={index} />
                     ))}
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         paddingHorizontal: spacingX._30,
-        paddingTop: spacingY._40,
+        paddingTop: spacingY._20,
         width: '100%',
         position: 'absolute',
         bottom: 0,
@@ -78,5 +89,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.light.text,
         marginTop: 5
+    },
+    iconContainer: {
+        backgroundColor: Colors.light.secondaryBtn,
+        padding: spacingX._5,
+        borderRadius: 50,
     }
 });

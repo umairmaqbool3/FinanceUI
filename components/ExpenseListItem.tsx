@@ -1,10 +1,12 @@
 import { Colors } from '@/constants/theme'
 import { spacingX, spacingY } from '@/constants/theme1'
+import { useColorScheme } from '@/hooks/use-color-scheme'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ThemedText } from './themed-text'
 
 const ExpenseListItem = ({ index, item }: { index: any, item: any }) => {
+    const theme = useColorScheme() ?? 'light';
     return (
         <View key={index} style={[styles.singleItemContainer]}>
             <View style={[styles.iconBackgroundView, {
@@ -23,7 +25,7 @@ const ExpenseListItem = ({ index, item }: { index: any, item: any }) => {
             </View>
             <View style={styles.verticalDivider} />
             <View style={{ width: 75, alignItems: 'flex-end' }}>
-                <ThemedText style={{ color: item?.amount.startsWith("-") ? Colors.light.focusText : Colors.light.white }}>{item.amount}</ThemedText>
+                <ThemedText style={{ color: item?.amount.startsWith("-") ? Colors.light.focusText : Colors[theme].text }}>{item.amount}</ThemedText>
             </View>
         </View>
     )

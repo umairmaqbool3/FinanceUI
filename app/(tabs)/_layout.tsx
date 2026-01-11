@@ -3,6 +3,7 @@ import CategoryIcon from '@/assets/svgs/CategoryIcon';
 import HomeIcon from '@/assets/svgs/HomeIcon';
 import ProfileIcon from '@/assets/svgs/Profile';
 import TransactionIcon from '@/assets/svgs/TransactionIcon';
+import AnimatedTabIcon from '@/components/AnimatedTabIcon';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Tabs } from 'expo-router';
@@ -12,15 +13,6 @@ import { Platform, View } from 'react-native';
 export default function TabLayout() {
     const colorScheme = useColorScheme();
     const theme = colorScheme ?? 'light';
-
-    const activeItemStyle = {
-        borderRadius: 20,
-        padding: 10,
-        height: 50,
-        width: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
 
     return (
         <View style={{ backgroundColor: Colors[theme].secondary, flex: 1 }}>
@@ -45,13 +37,8 @@ export default function TabLayout() {
                     name="index"
                     options={{
                         title: 'Home',
-                        tabBarIcon: ({ color, focused }) => (
-                            <View
-                                style={[{
-                                    backgroundColor: focused ? Colors.light.primary : 'transparent',
-                                }, activeItemStyle as any]}>
-                                <HomeIcon theme={theme} />
-                            </View>
+                        tabBarIcon: ({ focused }) => (
+                            <AnimatedTabIcon focused={focused} icon={HomeIcon} theme={theme} />
                         ),
                     }}
                 />
@@ -59,13 +46,8 @@ export default function TabLayout() {
                     name="search"
                     options={{
                         title: 'Search',
-                        tabBarIcon: ({ color, focused }) => (
-                            <View
-                                style={[{
-                                    backgroundColor: focused ? Colors.light.primary : 'transparent',
-                                }, activeItemStyle as any]}>
-                                <AnalysisIcon theme={theme} />
-                            </View>
+                        tabBarIcon: ({ focused }) => (
+                            <AnimatedTabIcon focused={focused} icon={AnalysisIcon} theme={theme} />
                         ),
                     }}
                 />
@@ -73,13 +55,8 @@ export default function TabLayout() {
                     name="transaction"
                     options={{
                         title: 'Transaction',
-                        tabBarIcon: ({ color, focused }) => (
-                            <View
-                                style={[{
-                                    backgroundColor: focused ? Colors.light.primary : 'transparent',
-                                }, activeItemStyle as any]}>
-                                <TransactionIcon theme={theme} />
-                            </View>
+                        tabBarIcon: ({ focused }) => (
+                            <AnimatedTabIcon focused={focused} icon={TransactionIcon} theme={theme} />
                         ),
                     }}
                 />
@@ -87,13 +64,8 @@ export default function TabLayout() {
                     name="category"
                     options={{
                         title: 'Category',
-                        tabBarIcon: ({ color, focused }) => (
-                            <View
-                                style={[{
-                                    backgroundColor: focused ? Colors.light.primary : 'transparent',
-                                }, activeItemStyle as any]}>
-                                <CategoryIcon theme={theme} />
-                            </View>
+                        tabBarIcon: ({ focused }) => (
+                            <AnimatedTabIcon focused={focused} icon={CategoryIcon} theme={theme} />
                         ),
                     }}
                 />
@@ -101,13 +73,8 @@ export default function TabLayout() {
                     name="profile"
                     options={{
                         title: 'Profile',
-                        tabBarIcon: ({ color, focused }) => (
-                            <View
-                                style={[{
-                                    backgroundColor: focused ? Colors.light.primary : 'transparent',
-                                }, activeItemStyle as any]}>
-                                <ProfileIcon theme={theme} />
-                            </View>
+                        tabBarIcon: ({ focused }) => (
+                            <AnimatedTabIcon focused={focused} icon={ProfileIcon} theme={theme} />
                         ),
                     }}
                 />

@@ -1,3 +1,5 @@
+import ExpenseIcon from '@/assets/svgs/ExpenseIcon';
+import IncomeIcon from '@/assets/svgs/IncomeIcon';
 import BalanceComponent from '@/components/BalanceComponent';
 import ExpenseListItem from '@/components/ExpenseListItem';
 import Header from '@/components/Header';
@@ -9,13 +11,20 @@ import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { Platform, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import React, { useState } from 'react';
+import { Dimensions, Platform, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+
+const { width: DimWidth } = Dimensions.get('screen');
 
 const TransactionScreen = () => {
     const theme = useColorScheme() ?? 'light';
     const router = useRouter();
     const { width, height } = useWindowDimensions();
+    const [showIncomeExpense, setShowIncomeExpense] = useState(false);
+
+    const toggleIncomeExpense = () => {
+        setShowIncomeExpense(!showIncomeExpense);
+    };
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary, }}>
@@ -33,12 +42,28 @@ const TransactionScreen = () => {
                 }}
             />
 
-            <View style={styles.balanceContainer}>
+            <Pressable style={[styles.balanceContainer, { marginBottom: !showIncomeExpense ? -spacingY._30 : spacingY._10 }]} onPress={toggleIncomeExpense}>
                 <Text style={styles.totalBalance}>Total Balance</Text>
                 <Text style={styles.totalAmount}>$7,783.00</Text>
-            </View>
+            </Pressable>
 
-            <BalanceComponent />
+            {showIncomeExpense ? (
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: spacingX._12 }}>
+                    <View style={styles.incomeExpenseContainer}>
+                        <IncomeIcon size={25} color={Colors.light.primary} />
+                        <Text style={styles.incomeText}>Income</Text>
+                        <Text style={styles.incomeAmountText}>$4,120.00</Text>
+                    </View>
+                    <View style={styles.incomeExpenseContainer}>
+                        <ExpenseIcon size={25} color={Colors.light.focusText} />
+                        <Text style={styles.incomeText}>Expense</Text>
+                        <Text style={styles.incomeAmountText}>$1,187.40</Text>
+                    </View>
+                </View>
+            ) : (
+                <BalanceComponent />
+            )}
+
 
             <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.52 : 0.52), backgroundColor: Colors[theme].secondary }]}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -73,7 +98,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.secondary,
         marginHorizontal: spacingX._30,
         marginTop: spacingY._10,
-        marginBottom: -spacingY._30,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 12,
@@ -94,5 +118,19 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.secondaryBtn,
         padding: spacingX._5,
         borderRadius: 50,
-    }
+    },
+    incomeExpenseContainer: {
+        flex: 1,
+        // width: DimWidth / 3,
+        flexGrow: 4,
+        backgroundColor: Colors.light.secondaryBtn,
+        padding: spacingX._15,
+        marginHorizontal: spacingX._30,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 3
+    },
+    incomeText: { color: Colors.light.text, fontSize: 12, fontWeight: '400' },
+    incomeAmountText: { color: Colors.light.text, fontSize: 16, fontWeight: '600' },
 });

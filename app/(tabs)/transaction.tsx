@@ -48,7 +48,7 @@ const TransactionScreen = () => {
             </Pressable>
 
             {showIncomeExpense ? (
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: spacingX._12 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: spacingX._30, gap: spacingX._12 }}>
                     <View style={styles.incomeExpenseContainer}>
                         <IncomeIcon size={25} color={Colors.light.primary} />
                         <Text style={styles.incomeText}>Income</Text>
@@ -121,11 +121,8 @@ const styles = StyleSheet.create({
     },
     incomeExpenseContainer: {
         flex: 1,
-        // width: DimWidth / 3,
-        flexGrow: 4,
         backgroundColor: Colors.light.secondaryBtn,
         padding: spacingX._15,
-        marginHorizontal: spacingX._30,
         borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',

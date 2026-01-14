@@ -16,6 +16,10 @@ import { Dimensions, Platform, Pressable, ScrollView, StyleSheet, Text, View, us
 
 const { width: DimWidth } = Dimensions.get('screen');
 
+import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 const TransactionScreen = () => {
     const theme = useColorScheme() ?? 'light';
     const router = useRouter();
@@ -25,6 +29,12 @@ const TransactionScreen = () => {
     const toggleIncomeExpense = () => {
         setShowIncomeExpense(!showIncomeExpense);
     };
+
+    const animatedMarginStyle = useAnimatedStyle(() => {
+        return {
+            marginBottom: withTiming(showIncomeExpense ? spacingY._10 : -spacingY._30, { duration: 500 }),
+        };
+    });
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary, }}>
@@ -42,13 +52,17 @@ const TransactionScreen = () => {
                 }}
             />
 
-            <Pressable style={[styles.balanceContainer, { marginBottom: !showIncomeExpense ? -spacingY._30 : spacingY._10 }]} onPress={toggleIncomeExpense}>
+            <AnimatedPressable style={[styles.balanceContainer, animatedMarginStyle]} onPress={toggleIncomeExpense}>
                 <Text style={styles.totalBalance}>Total Balance</Text>
                 <Text style={styles.totalAmount}>$7,783.00</Text>
-            </Pressable>
+            </AnimatedPressable>
 
             {showIncomeExpense ? (
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: spacingX._30, gap: spacingX._12 }}>
+                <Animated.View
+                    entering={FadeInUp.duration(300)}
+                    exiting={FadeOutDown.duration(300)}
+                    style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: spacingX._30, gap: spacingX._12 }}
+                >
                     <View style={styles.incomeExpenseContainer}>
                         <IncomeIcon size={25} color={Colors.light.primary} />
                         <Text style={styles.incomeText}>Income</Text>
@@ -59,9 +73,14 @@ const TransactionScreen = () => {
                         <Text style={styles.incomeText}>Expense</Text>
                         <Text style={styles.incomeAmountText}>$1,187.40</Text>
                     </View>
-                </View>
+                </Animated.View>
             ) : (
-                <BalanceComponent />
+                <Animated.View
+                    entering={FadeIn.duration(300)}
+                    exiting={FadeOut.duration(300)}
+                >
+                    <BalanceComponent />
+                </Animated.View>
             )}
 
 
@@ -95,7 +114,7 @@ const styles = StyleSheet.create({
         bottom: 0,
     },
     balanceContainer: {
-        backgroundColor: Colors.light.secondary,
+        backgroundColor: Colors.light.secondaryBtn,
         marginHorizontal: spacingX._30,
         marginTop: spacingY._10,
         justifyContent: 'center',

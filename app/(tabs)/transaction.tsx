@@ -16,7 +16,7 @@ import { Dimensions, Platform, Pressable, ScrollView, StyleSheet, Text, View, us
 
 const { width: DimWidth } = Dimensions.get('screen');
 
-import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated, { FadeInUp, FadeOutDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -76,8 +76,8 @@ const TransactionScreen = () => {
                 </Animated.View>
             ) : (
                 <Animated.View
-                    entering={FadeIn.duration(300)}
-                    exiting={FadeOut.duration(300)}
+                    entering={FadeInUp.duration(300)}
+                    exiting={FadeOutDown.duration(300)}
                 >
                     <BalanceComponent />
                 </Animated.View>

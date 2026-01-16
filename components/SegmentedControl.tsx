@@ -174,7 +174,7 @@ function SegmentedControl<T extends { name: string; icon: string }>({
                 style={[
                     {
                         width: cellBackgroundWidth - internalPadding / data.length,
-                        height: height - internalPadding * 2,
+                        height: height - internalPadding * 1.5,
                     },
                     localStyles.highlightedCellContent,
                     rCellMessageStyle,
@@ -214,7 +214,7 @@ const localStyles = StyleSheet.create({
     },
     backgroundContainer: {
         flexDirection: 'row',
-        borderRadius: 30,
+        borderRadius: 20,
         marginVertical: 10
     },
     difficultyLabel: {
@@ -231,7 +231,7 @@ const localStyles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         backgroundColor: Colors.light.primary,
-        borderRadius: 30,
+        borderRadius: 18,
         // shadowOpacity: 0.1,
         // shadowOffset: { height: 1, width: 0 },
         // shadowRadius: 2,

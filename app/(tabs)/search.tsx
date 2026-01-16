@@ -1,6 +1,7 @@
 import BalanceComponent from '@/components/BalanceComponent';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
+import { SegmentedControl } from '@/components/SegmentedControl';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -12,6 +13,7 @@ import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 const SearchScreen = () => {
     const theme = useColorScheme() ?? 'light';
     const { width, height } = useWindowDimensions();
+    const [selectedPeriod, setSelectedPeriod] = React.useState({ name: 'Daily ', icon: '' });
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
             <Header
@@ -32,7 +34,13 @@ const SearchScreen = () => {
             <BalanceComponent />
 
             <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.57 : 0.57), backgroundColor: Colors[theme].secondary }]}>
-
+                <SegmentedControl
+                    data={[{ name: 'Daily ', icon: '' }, { name: 'Weekly', icon: '' }, { name: 'Monthly', icon: '' }, { name: 'Yearly', icon: '' }]}
+                    onPress={item => setSelectedPeriod(item)}
+                    selected={selectedPeriod}
+                    width={width - 55}
+                    height={55}
+                />
             </View>
         </Screen>
     );

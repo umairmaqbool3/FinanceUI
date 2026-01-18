@@ -5,8 +5,8 @@ import Svg, { Path } from "react-native-svg";
 function TransactionIcon(props: any) {
     return (
         <Svg
-            width={28}
-            height={28}
+            width={props.size ? props.size : 28}
+            height={props.size ? props.size : 28}
             viewBox="0 0 35 27"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

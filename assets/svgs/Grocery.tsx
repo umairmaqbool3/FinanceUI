@@ -4,8 +4,8 @@ import Svg, { Path } from "react-native-svg"
 function GroceryIcon(props: any) {
     return (
         <Svg
-            width={19}
-            height={30}
+            width={props.size ? props.size : 19}
+            height={props.size ? props.size : 30}
             viewBox="0 0 19 30"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ function GroceryIcon(props: any) {
         >
             <Path
                 d="M1.28 11.924c-.09-.487-.17-.992-.232-1.507C.43 5.38 1.529 1.105 3.5.86 5.47.617 7.579 4.509 8.196 9.545c.068.566.12 1.16.148 1.699M1.62 3.62l2.464.928M.878 6.894l3.03 1.314M3.49 24.986h11.539M9.392 12.127a4.123 4.123 0 01-.076-5.895 4.118 4.118 0 012.908-1.208 4.118 4.118 0 013.891 5.472M12.224 6.39s-.125-2.583 1.824-3.829m-12.92 9.567l1.132-1.5a.878.878 0 011.394 0l1.047 1.37a.436.436 0 00.697 0l1.048-1.37a.878.878 0 011.394 0l.996 1.325a.499.499 0 00.794 0l1.02-1.314a.871.871 0 011.387 0l1.048 1.37a.441.441 0 00.702 0l1.048-1.37a.872.872 0 011.388 0l1.133 1.5c.16.215.247.475.249.743v13.974a1.433 1.433 0 01-1.433 1.433H2.277A1.433 1.433 0 01.85 26.855V12.87c.007-.272.105-.533.277-.742z"
-                stroke="#F1FFF3"
+                stroke={props.color ? props.color : "#F1FFF3"}
                 strokeWidth={1.69934}
                 strokeLinecap="round"
                 strokeLinejoin="round"

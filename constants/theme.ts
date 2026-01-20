@@ -22,6 +22,7 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     focusText: '#007AFF',
     tabbarBg: '#dff7e2',
+    lightBlue: '#6DB6FE'
   },
   dark: {
     primary: '#052224',

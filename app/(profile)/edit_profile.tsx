@@ -12,7 +12,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, StyleSheet, TextInput, useWindowDimensions, View } from 'react-native';
 
 const data = [
   {
@@ -66,6 +66,21 @@ const EditProfileScreen = () => {
           </View>
         </View>
 
+        <ThemedText type='subtitle'>
+          Account Settings
+        </ThemedText>
+
+        <View>
+          <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Username</ThemedText>
+          <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+            <TextInput
+              placeholder="John Smith"
+              placeholderTextColor={Colors[theme].icon}
+              style={[styles.input, { color: Colors[theme].text }]}
+            />
+          </View>
+        </View>
+
 
       </View>
     </Screen>
@@ -88,5 +103,26 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.secondaryBtn,
     padding: spacingX._5,
     borderRadius: 50,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '400',
+    marginBottom: spacingY._5,
+    marginTop: spacingY._10,
+    marginLeft: spacingX._10,
+  },
+  inputContainer: {
+    borderRadius: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacingX._20,
+    height: 42,
+    marginBottom: spacingY._5,
+  },
+  input: {
+    flex: 1,
+    height: '100%',
+    fontSize: 14,
+    paddingLeft: spacingX._7,
   },
 });

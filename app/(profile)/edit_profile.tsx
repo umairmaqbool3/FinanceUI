@@ -58,7 +58,7 @@ const EditProfileScreen = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.65 : 0.65), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.78 : 0.78), backgroundColor: Colors[theme].secondary }]}>
         <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
           <View style={{ marginTop: - (height / 7) * 0.65 }}>
             <Image source={require('@/assets/images/profile.png')} style={{ width: 100, height: 100, marginBottom: 10 }} />
@@ -66,7 +66,7 @@ const EditProfileScreen = () => {
           </View>
         </View>
 
-        <ThemedText type='subtitle'>
+        <ThemedText type='subtitle' style={{ marginTop: spacingY._20 }}>
           Account Settings
         </ThemedText>
 
@@ -76,6 +76,30 @@ const EditProfileScreen = () => {
             <TextInput
               placeholder="John Smith"
               placeholderTextColor={Colors[theme].icon}
+              style={[styles.input, { color: Colors[theme].text }]}
+            />
+          </View>
+        </View>
+
+        <View>
+          <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Phone</ThemedText>
+          <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+            <TextInput
+              placeholder="+44 555 5555 55"
+              placeholderTextColor={Colors[theme].icon}
+              inputMode='numeric'
+              style={[styles.input, { color: Colors[theme].text }]}
+            />
+          </View>
+        </View>
+
+        <View>
+          <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Email Address</ThemedText>
+          <View style={[styles.inputContainer, { backgroundColor: Colors[theme].secondaryBtn }]}>
+            <TextInput
+              placeholder="johnsmith@example.com"
+              placeholderTextColor={Colors[theme].icon}
+              inputMode='email'
               style={[styles.input, { color: Colors[theme].text }]}
             />
           </View>
@@ -112,16 +136,16 @@ const styles = StyleSheet.create({
     marginLeft: spacingX._10,
   },
   inputContainer: {
-    borderRadius: 25,
+    borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacingX._20,
-    height: 42,
+    height: 35,
     marginBottom: spacingY._5,
   },
   input: {
     flex: 1,
-    height: '100%',
+    // height: '80%',
     fontSize: 14,
     paddingLeft: spacingX._7,
   },

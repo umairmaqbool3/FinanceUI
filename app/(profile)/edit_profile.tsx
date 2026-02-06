@@ -3,6 +3,8 @@ import LogoutIcon from '@/assets/svgs/LogoutIcon';
 import ProfileIcon from '@/assets/svgs/Profile';
 import SecurityIcon from '@/assets/svgs/SecurityIcon';
 import SettingIcon from '@/assets/svgs/SettingIcon';
+import CustomButton from '@/components/CustomButton';
+import CustomSwitch from '@/components/CustomSwitch';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
@@ -40,6 +42,7 @@ const data = [
 const EditProfileScreen = () => {
   const theme = useColorScheme() ?? 'light';
   const { width, height } = useWindowDimensions();
+  const [enabled, setEnabled] = React.useState(false);
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -50,7 +53,7 @@ const EditProfileScreen = () => {
         rightIcon={<View style={styles.iconContainer}>
           <Ionicons name="notifications-outline" size={20} />
         </View>}
-        onLeftPress={() => router.replace('/(tabs)')}
+        onLeftPress={() => router.back()}
         onRightPress={() => console.log('Notifications/Right pressed')}
         style={{
           marginHorizontal: spacingX._12,
@@ -63,6 +66,7 @@ const EditProfileScreen = () => {
           <View style={{ marginTop: - (height / 7) * 0.65 }}>
             <Image source={require('@/assets/images/profile.png')} style={{ width: 100, height: 100, marginBottom: 10 }} />
             <ThemedText type='defaultSemiBold'>John Smith</ThemedText>
+            <ThemedText style={{ fontSize: 12, textAlign: 'center', marginTop: -5 }}>ID: 25030024</ThemedText>
           </View>
         </View>
 
@@ -103,6 +107,38 @@ const EditProfileScreen = () => {
               style={[styles.input, { color: Colors[theme].text }]}
             />
           </View>
+        </View>
+
+        <View style={styles.switchContainers}>
+          <ThemedText>
+            Push Notification
+          </ThemedText>
+
+          <CustomSwitch
+            value={enabled}
+            onValueChange={setEnabled}
+          />
+
+        </View>
+
+        <View style={styles.switchContainers}>
+          <ThemedText>
+            Turn Dark Theme
+          </ThemedText>
+
+          <CustomSwitch
+            value={enabled}
+            onValueChange={setEnabled}
+          />
+
+        </View>
+
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25 }}>
+          <CustomButton
+            title="Update Profile"
+            textStyle={{ color: 'black', fontSize: 14, }}
+            onPress={() => router.back()}
+          />
         </View>
 
 
@@ -149,4 +185,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingLeft: spacingX._7,
   },
+  switchContainers: {
+    marginVertical: spacingY._20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }
 });

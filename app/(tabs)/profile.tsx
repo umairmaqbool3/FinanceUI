@@ -23,7 +23,7 @@ const data = [
     {
         icon: <SecurityIcon color={Colors.light.white} />,
         title: 'Security',
-        // onPress: () => router.push('/(profile)/security'),
+        onPress: () => router.push('/(profile)/security'),
     },
     {
         icon: <SettingIcon color={Colors.light.white} />,

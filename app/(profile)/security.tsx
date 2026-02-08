@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 const Security = () => {
   const theme = useColorScheme() ?? 'light';
@@ -37,24 +37,24 @@ const Security = () => {
           Security
         </ThemedText>
 
-        <Pressable style={styles.itemView} onPress={() => console.log("change pin pressed")}>
+        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/changePin")}>
           <ThemedText>Change Pin</ThemedText>
           <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </Pressable>
+        </TouchableOpacity>
 
         <View style={styles.divider} />
 
-        <Pressable style={styles.itemView}>
+        <TouchableOpacity style={styles.itemView}>
           <ThemedText>Fingerprint</ThemedText>
           <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </Pressable>
+        </TouchableOpacity>
 
         <View style={styles.divider} />
 
-        <Pressable style={styles.itemView}>
+        <TouchableOpacity style={styles.itemView}>
           <ThemedText>Terms And Conditions</ThemedText>
           <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </Pressable>
+        </TouchableOpacity>
 
         <View style={styles.divider} />
 

@@ -1,23 +1,27 @@
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
-import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
-import React from 'react';
-import { Platform, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
-const Security = () => {
+const TermsAndConditions = () => {
   const theme = useColorScheme() ?? 'light';
   const { width, height } = useWindowDimensions();
+  const [currentPin, setCurrentPin] = useState('');
+  const [newPin, setNewPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
+  const [showCurrentPin, setShowCurrentPin] = useState(false);
+  const [showNewPin, setShowNewPin] = useState(false);
+  const [showConfirmPin, setShowConfirmPin] = useState(false);
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
-        title="Security"
+        title="Terms & Conditions"
         theme={theme}
         leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
         rightIcon={<View style={styles.iconContainer}>
@@ -33,37 +37,13 @@ const Security = () => {
 
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.80), backgroundColor: Colors[theme].secondary }]}>
 
-        <ThemedText type='subtitle' style={{ marginVertical: spacingY._15 }}>
-          Security
-        </ThemedText>
-
-        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/changePin")}>
-          <ThemedText>Change Pin</ThemedText>
-          <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
-
-        <TouchableOpacity style={styles.itemView}>
-          <ThemedText>Fingerprint</ThemedText>
-          <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
-
-        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/termsAndConditions")}>
-          <ThemedText>Terms And Conditions</ThemedText>
-          <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
 
       </View>
     </Screen>
   )
 }
 
-export default Security;
+export default TermsAndConditions;
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -80,16 +60,31 @@ const styles = StyleSheet.create({
     padding: spacingX._5,
     borderRadius: 50,
   },
-  itemView: {
-    marginVertical: spacingY._20,
+  formContainer: {
+    flex: 1,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '400',
+    marginBottom: spacingY._5,
+    marginTop: spacingY._10,
+    marginLeft: spacingX._10,
+  },
+  inputContainer: {
+    borderRadius: 25,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    paddingHorizontal: spacingX._20,
+    height: 42,
+    marginBottom: spacingY._5,
   },
-  divider: {
-    width: '100%',
-    height: 0.8,
-    backgroundColor: Colors.light.secondaryBtn,
-    marginVertical: spacingY._10
-  }
+  input: {
+    flex: 1,
+    height: '100%',
+    fontSize: 14,
+    paddingLeft: spacingX._7,
+  },
+  eyeIcon: {
+    padding: 5,
+  },
 })

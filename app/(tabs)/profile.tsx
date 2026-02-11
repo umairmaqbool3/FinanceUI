@@ -28,7 +28,7 @@ const data = [
     {
         icon: <SettingIcon color={Colors.light.white} />,
         title: 'Setting',
-        // onPress: () => router.push('/(profile)/setting'),
+        onPress: () => router.push('/(profile)/setting'),
     },
     {
         icon: <HelpIcon color={Colors.light.white} />,

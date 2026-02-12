@@ -16,7 +16,7 @@ let options = [
   {
     icon: <Ionicons name="notifications-outline" size={18} />,
     title: 'Notification Settings',
-    // onPress: () => router.push('/(profile)/profile'),
+    onPress: () => router.push('/(setting)/notificationSetting'),
   },
   {
     icon: <Foundation name="key" size={18} />,
@@ -53,7 +53,7 @@ const Setting = () => {
 
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.85), backgroundColor: Colors[theme].secondary }]}>
         {options.map((item, index) => (
-          <TouchableOpacity key={index} style={styles.optionContainer}>
+          <TouchableOpacity key={index} style={styles.optionContainer} onPress={item.onPress}>
             <View style={styles.optionLeft}>
               <View style={styles.leftIconContainer}>
                 {item.icon}

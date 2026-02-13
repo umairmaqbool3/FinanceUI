@@ -21,7 +21,7 @@ let options = [
   {
     icon: <Foundation name="key" size={18} />,
     title: 'Password Settings',
-    // onPress: () => router.push('/(profile)/profile'),
+    onPress: () => router.push('/(setting)/changePassword'),
   },
   {
     icon: <FontAwesome name="user-o" size={16} color="black" />,

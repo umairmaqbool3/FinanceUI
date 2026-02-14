@@ -26,7 +26,7 @@ let options = [
   {
     icon: <FontAwesome name="user-o" size={16} color="black" />,
     title: 'Delete Account',
-    // onPress: () => router.push('/(profile)/profile'),
+    onPress: () => router.push('/(setting)/deleteAccount'),
   },
 ]
 

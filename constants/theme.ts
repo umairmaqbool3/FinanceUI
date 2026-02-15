@@ -42,6 +42,8 @@ export const Colors = {
 
 export const Fonts = Platform.select({
   default: {
+    thin: 'Poppins_100Thin',
+    light: 'Poppins_300Light',
     regular: 'Poppins_400Regular',
     medium: 'Poppins_500Medium',
     semiBold: 'Poppins_600SemiBold',

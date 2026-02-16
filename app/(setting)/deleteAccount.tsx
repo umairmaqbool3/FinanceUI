@@ -106,9 +106,7 @@ const DeleteAccount = () => {
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
           title="Delete Account"
-        >
-          <Text>Are You Sure You Want To Log Out?</Text>
-        </CustomModal>
+        />
 
       </View>
 

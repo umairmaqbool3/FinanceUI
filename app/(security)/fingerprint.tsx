@@ -10,14 +10,14 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Platform, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
-const Security = () => {
+const Fingerprint = () => {
   const theme = useColorScheme() ?? 'light';
   const { width, height } = useWindowDimensions();
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
-        title="Security"
+        title="Fingerprint"
         theme={theme}
         leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
         rightIcon={<View style={styles.iconContainer}>
@@ -33,37 +33,32 @@ const Security = () => {
 
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.80), backgroundColor: Colors[theme].secondary }]}>
 
-        <ThemedText type='subtitle' style={{ marginVertical: spacingY._15 }}>
-          Security
-        </ThemedText>
-
-        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/changePin")}>
-          <ThemedText>Change Pin</ThemedText>
+        <TouchableOpacity style={styles.itemView} onPress={() => console.log("Jhon fingerprint pressed")}>
+          <View style={styles.itemInnerView}>
+            <View style={styles.optionIconContainer}>
+              <Ionicons name="finger-print" size={30} color={Colors[theme].text} />
+            </View>
+            <ThemedText>Jhon fingerprint</ThemedText>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
         </TouchableOpacity>
 
-        <View style={styles.divider} />
-
-        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/fingerprint")}>
-          <ThemedText>Fingerprint</ThemedText>
+        <TouchableOpacity style={styles.itemView} onPress={() => console.log("Add fingerprint pressed")}>
+          <View style={styles.itemInnerView}>
+            <View style={[styles.optionIconContainer]}>
+              <Ionicons name="add" size={30} color={Colors[theme].text} />
+            </View>
+            <ThemedText>Add A fingerprint</ThemedText>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
         </TouchableOpacity>
-
-        <View style={styles.divider} />
-
-        <TouchableOpacity style={styles.itemView} onPress={() => router.push("/(security)/termsAndConditions")}>
-          <ThemedText>Terms And Conditions</ThemedText>
-          <MaterialIcons name="arrow-forward-ios" size={20} color={Colors[theme].text} />
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
 
       </View>
     </Screen>
   )
 }
 
-export default Security;
+export default Fingerprint;
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -81,15 +76,24 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   itemView: {
-    marginVertical: spacingY._20,
+    marginVertical: spacingY._15,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  divider: {
-    width: '100%',
-    height: 0.8,
-    backgroundColor: Colors.light.secondaryBtn,
-    marginVertical: spacingY._10
+  itemInnerView: {
+    flexDirection: 'row',
+    gap: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  optionIconContainer: {
+    backgroundColor: Colors.light.lightBlue,
+    borderRadius: 20,
+    padding: 10,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

@@ -33,7 +33,7 @@ const data = [
     {
         icon: <HelpIcon color={Colors.light.white} />,
         title: 'Help',
-        // onPress: () => router.push('/(profile)/help'),
+        onPress: () => router.push('/(profile)/help'),
     },
     {
         icon: <LogoutIcon color={Colors.light.white} size={26} />,

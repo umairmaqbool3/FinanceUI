@@ -61,7 +61,7 @@ const EditProfileScreen = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.78 : 0.78), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.78 : 0.85), backgroundColor: Colors[theme].secondary }]}>
         <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
           <View style={{ marginTop: - (height / 7) * 0.65 }}>
             <Image source={require('@/assets/images/profile.png')} style={{ width: 100, height: 100, marginBottom: 10 }} />

@@ -31,7 +31,7 @@ const Fingerprint = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.80), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.90), backgroundColor: Colors[theme].secondary }]}>
 
         <TouchableOpacity style={styles.itemView} onPress={() => console.log("Jhon fingerprint pressed")}>
           <View style={styles.itemInnerView}>

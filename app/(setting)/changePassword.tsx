@@ -54,7 +54,7 @@ const ChangePassword = () => {
             }}
           />
 
-          <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.80), backgroundColor: Colors[theme].secondary }]}>
+          <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.90), backgroundColor: Colors[theme].secondary }]}>
 
             <View style={styles.formContainer}>
               <ThemedText style={[styles.label, { color: Colors[theme].text }]}>Current Password</ThemedText>

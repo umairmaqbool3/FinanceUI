@@ -39,7 +39,7 @@ const NotificationSetting = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.85), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.90), backgroundColor: Colors[theme].secondary }]}>
         {/* {options.map((item, index) => ( */}
         <View style={styles.optionContainer}>
           <View style={styles.optionLeft}>

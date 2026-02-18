@@ -8,7 +8,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 
 
@@ -16,6 +16,7 @@ const Help = () => {
   const theme = useColorScheme() ?? 'light';
   const { width, height } = useWindowDimensions();
   const [selectedPeriod, setSelectedPeriod] = React.useState({ name: 'FAQ ', icon: '' });
+  const [selectedTab, setSelectedTab] = React.useState('General');
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -34,7 +35,7 @@ const Help = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.85), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.90), backgroundColor: Colors[theme].secondary }]}>
 
         <ThemedText style={styles.title}>How Can We Help You?</ThemedText>
 
@@ -45,6 +46,30 @@ const Help = () => {
           width={width - 55}
           height={55}
         />
+
+        <View style={[styles.tabsContainer, { backgroundColor: Colors[theme].tabbarBg }]}>
+          {['General', 'Account', 'Services'].map((tab) => (
+            <Pressable
+              key={tab}
+              onPress={() => setSelectedTab(tab)}
+              style={[
+                styles.tab,
+                // selectedTab === tab && { backgroundColor: Colors[theme].tint,}
+              ]}
+            >
+              <ThemedText
+                style={[
+                  styles.tabText,
+                  // selectedTab === tab && { color: Colors[theme].background }
+                ]}
+              >
+                {tab}
+              </ThemedText>
+            </Pressable>
+          ))}
+        </View>
+
+
 
       </View>
     </Screen>
@@ -70,6 +95,24 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center'
-  }
+  },
+  tabsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: spacingY._5,
+    gap: spacingX._10,
+    borderRadius: 12
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: spacingY._10,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabText: {
+    fontWeight: '400',
+    fontSize: 14,
+  },
 
 })

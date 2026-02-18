@@ -34,7 +34,7 @@ const DeleteAccount = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.85), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.90), backgroundColor: Colors[theme].secondary }]}>
 
         <ThemedText style={[styles.title, { color: Colors[theme].text }]}>
           Are You Sure You Want To Delete Your Account?
@@ -43,7 +43,7 @@ const DeleteAccount = () => {
         <View style={{
           backgroundColor: Colors.dark.secondaryBtn,
           width: '100%',
-          height: '30%',
+          height: (height * (Platform.OS == 'ios' ? 0.85 : 0.90)) - 1000, // '30%',
           borderRadius: 25,
           marginVertical: spacingY._15,
           paddingVertical: spacingX._15,

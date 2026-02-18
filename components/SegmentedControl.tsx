@@ -126,7 +126,7 @@ function SegmentedControl<T extends { name: string; icon: string }>({
                         color: withTiming(
                             selectedCellIndex === index
                                 ? Palette.highlightLabel
-                                : Palette.baseLabel,
+                                : Colors[theme].text,
                             TimingConfig,
                         ),
                     };

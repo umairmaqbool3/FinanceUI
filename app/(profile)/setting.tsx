@@ -51,7 +51,7 @@ const Setting = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.85), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.90), backgroundColor: Colors[theme].secondary }]}>
         {options.map((item, index) => (
           <TouchableOpacity key={index} style={styles.optionContainer} onPress={item.onPress}>
             <View style={styles.optionLeft}>

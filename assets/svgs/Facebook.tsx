@@ -4,8 +4,8 @@ import Svg, { Path } from "react-native-svg"
 function Facebook(props: any) {
   return (
     <Svg
-      width={35}
-      height={34}
+      width={props.size ? props.size : 35}
+      height={props.size ? props.size : 34}
       viewBox="0 0 35 34"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

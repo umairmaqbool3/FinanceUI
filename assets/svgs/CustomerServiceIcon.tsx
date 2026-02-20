@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Circle, Path } from "react-native-svg";
 
-function CustomerService(props: any) {
+function CustomerServiceIcon(props: any) {
   return (
     <Svg
       width={props.size ? props.size : 35}
@@ -33,4 +33,4 @@ function CustomerService(props: any) {
   )
 }
 
-export default CustomerService;
+export default CustomerServiceIcon;

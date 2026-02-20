@@ -1,4 +1,4 @@
-import CustomerService from '@/assets/svgs/CustomerService';
+import CustomerServiceIcon from '@/assets/svgs/CustomerServiceIcon';
 import Facebook from '@/assets/svgs/Facebook';
 import WebsiteIcon from '@/assets/svgs/WebsiteIcon';
 import ExpandableFAQ, { FAQItem } from '@/components/FAQComponent';
@@ -14,7 +14,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { Animated, Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 
 const faqData: FAQItem[] = [
@@ -67,10 +67,9 @@ const faqData: FAQItem[] = [
 
 let options = [
   {
-    icon: <CustomerService size={28} />,
+    icon: <CustomerServiceIcon size={28} />,
     title: 'Customer Service',
-    // onPress: () => router.push('/(setting)/notificationSetting'),
-    onPress: () => console.log("customer service clicked"),
+    onPress: () => router.push('/(help)/customerService'),
   },
   {
     icon: <WebsiteIcon size={28} />,
@@ -100,8 +99,30 @@ const Help = () => {
   const { width, height } = useWindowDimensions();
   const [selectedPeriod, setSelectedPeriod] = React.useState({ name: 'FAQ ', icon: '' });
   const [selectedTab, setSelectedTab] = React.useState('General');
-  const [searchedText, setSearchedText] = React.useState('')
+  const [searchedText, setSearchedText] = React.useState('');
+  const animation = React.useRef(new Animated.Value(1)).current;
 
+  React.useEffect(() => {
+    // Reset animation value
+    animation.setValue(0);
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  }, [selectedPeriod]);
+
+  const animatedStyle = {
+    opacity: animation,
+    transform: [
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [20, 0],
+        }),
+      },
+    ],
+  };
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
@@ -164,23 +185,27 @@ const Help = () => {
         </View>
 
         {selectedPeriod.name === 'FAQ ' ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <ExpandableFAQ data={faqData} theme={theme} />
-          </ScrollView>
+          <Animated.View style={animatedStyle}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <ExpandableFAQ data={faqData} theme={theme} />
+            </ScrollView>
+          </Animated.View>
         ) : (
-          <View style={{ marginTop: spacingY._20 }}>
-            {options.map((item, index) => (
-              <TouchableOpacity key={index} style={styles.optionContainer} onPress={item.onPress}>
-                <View style={styles.optionLeft}>
-                  <View style={styles.leftIconContainer}>
-                    {item.icon}
+          <Animated.View style={animatedStyle}>
+            <View style={{ marginTop: spacingY._20 }}>
+              {options.map((item, index) => (
+                <TouchableOpacity key={index} style={styles.optionContainer} onPress={item.onPress}>
+                  <View style={styles.optionLeft}>
+                    <View style={styles.leftIconContainer}>
+                      {item.icon}
+                    </View>
+                    <ThemedText style={styles.optionTitle}>{item.title}</ThemedText>
                   </View>
-                  <ThemedText style={styles.optionTitle}>{item.title}</ThemedText>
-                </View>
-                <MaterialIcons name="arrow-forward-ios" size={18} color={Colors[theme].text} />
-              </TouchableOpacity>
-            ))}
-          </View>
+                  <MaterialIcons name="arrow-forward-ios" size={18} color={Colors[theme].text} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </Animated.View>
         )}
 
 

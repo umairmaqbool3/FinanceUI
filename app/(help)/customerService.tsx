@@ -87,9 +87,7 @@ const CustomerService = () => {
             <CustomButton
               title="Start Another Chat"
               textStyle={styles.buttonText}
-              onPress={() => console.log(
-                "I am pressed"
-              )}
+              onPress={() => router.push('/(help)/SuppportAssitantChat')}
             />
           </View>
         </ScrollView>

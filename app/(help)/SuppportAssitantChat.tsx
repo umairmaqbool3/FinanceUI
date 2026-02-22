@@ -1,34 +1,42 @@
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
 import { SegmentedControl } from '@/components/SegmentedControl';
-import { Colors } from '@/constants/theme';
+import { Colors, Fonts } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Platform, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 const list = [
   {
-    name: 'Help Center',
-    message: 'Your account is ready to use...',
-    time: 'Feb 08 -2024',
+    message: 'Welcome, I am your virtual assistant',
+    role: 'assistant',
   },
   {
-    name: 'Support Assistant',
-    message: 'Hello! I\'m here to assist you',
-    time: 'Dec 14 -2023',
+    message: 'How can I help you today?',
+    role: 'assistant',
   },
   {
-    name: 'Support Assistant',
-    message: 'Hello! I\'m here to assist you',
-    time: 'Sep 10 -2023',
+    message: 'Hello! I have a question. How can I record my expenses by date?',
+    role: 'user',
   },
   {
-    name: 'Help Center',
-    message: 'Hi, how are you today?',
-    time: 'June 12 -2023',
+    message: 'Response to your request:\nYou can register expenses in the top menu of the homepage.',
+    role: 'assistant',
+  },
+  {
+    message: 'Enter the purchase information, including the date, etc',
+    role: 'assistant',
+  },
+  {
+    message: 'OK, thanks a lot',
+    role: 'user',
+  },
+  {
+    message: 'It was a pleasure to acccommodate your request. See you soon!',
+    role: 'assistant',
   },
 ]
 
@@ -55,14 +63,25 @@ const SupportAssitantChat = () => {
       />
 
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.85 : 0.90), backgroundColor: Colors[theme].secondary }]}>
+        <SegmentedControl
+          data={[{ name: 'Support Assitant ', icon: '' }, { name: 'Help Center', icon: '' }]}
+          onPress={item => setSelectedPeriod(item)}
+          selected={selectedPeriod}
+          width={width - 55}
+          height={55}
+        />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SegmentedControl
-            data={[{ name: 'Support Assitant ', icon: '' }, { name: 'Help Center', icon: '' }]}
-            onPress={item => setSelectedPeriod(item)}
-            selected={selectedPeriod}
-            width={width - 55}
-            height={55}
-          />
+          {list.map((item, index) => (
+            <View key={index}
+              style={[styles.chatView, {
+                backgroundColor: item.role === 'user' ? Colors.light.primary : Colors.light.secondaryBtn,
+                alignSelf: item.role === 'user' ? 'flex-end' : 'flex-start',
+              }]}
+            >
+              <Text style={{ fontSize: 12, fontFamily: Fonts.light }}>{item.message}</Text>
+            </View>
+          ))}
+
         </ScrollView>
       </View>
     </Screen>
@@ -86,5 +105,11 @@ const styles = StyleSheet.create({
     padding: spacingX._5,
     borderRadius: 50,
   },
-
+  chatView: {
+    padding: spacingX._10,
+    paddingHorizontal: spacingX._15,
+    borderRadius: 50,
+    marginVertical: spacingY._7,
+    width: '75%',
+  }
 })

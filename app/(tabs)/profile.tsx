@@ -4,6 +4,7 @@ import ProfileIcon from '@/assets/svgs/Profile';
 import SecurityIcon from '@/assets/svgs/SecurityIcon';
 import SettingIcon from '@/assets/svgs/SettingIcon';
 import Header from '@/components/Header';
+import LogoutModal from '@/components/LogoutModal';
 import Screen from '@/components/Screen';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
@@ -11,7 +12,7 @@ import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Platform, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 const data = [
@@ -45,6 +46,7 @@ const ProfileScreen = () => {
     const theme = useColorScheme() ?? 'light';
     const { width, height } = useWindowDimensions();
     const router = useRouter();
+    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -73,7 +75,7 @@ const ProfileScreen = () => {
 
                 <View style={{ marginTop: spacingY._45 }}>
                     {data.map((item, index) => (
-                        <Pressable key={item.title} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 18, marginBottom: spacingY._30 }} onPress={item?.onPress}>
+                        <Pressable key={item.title} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 18, marginBottom: spacingY._30 }} onPress={item?.title == 'Logout' ? () => setModalVisible(true) : item?.onPress}>
                             <View style={{ backgroundColor: Colors.light.lightBlue, borderRadius: 20, padding: 12, width: 53, height: 53, justifyContent: 'center', alignItems: 'center' }}>
                                 {item.icon}
                             </View>
@@ -82,6 +84,11 @@ const ProfileScreen = () => {
                     ))}
                 </View>
             </View>
+            <LogoutModal
+                visible={modalVisible}
+                onClose={() => { setModalVisible(false) }}
+                title="End Session"
+            />
         </Screen>
     );
 };

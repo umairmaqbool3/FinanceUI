@@ -19,7 +19,7 @@ import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 let items = [
-    { name: 'Food', icon: FoodIcon },
+    { name: 'Food', icon: FoodIcon, onPress: () => router.push('/(categories)/food') },
     { name: 'Transport', icon: TransportIcon },
     { name: 'Medicine', icon: MedicineIcon },
     { name: 'Groceries', icon: GroceryIcon },
@@ -58,7 +58,9 @@ const CategoryScreen = () => {
                     <FlatList
                         data={items}
                         renderItem={({ item, index }) => (
-                            <TouchableOpacity style={styles.itemContainer}>
+                            <TouchableOpacity
+                                style={styles.itemContainer}
+                                onPress={item.name == 'Food' ? item.onPress : () => console.log('Pressed')}>
                                 <View style={[styles.itemIconContainer, { backgroundColor: index == 0 ? Colors.light.focusText : '#6DB6FE' }]}>
                                     <item.icon color={Colors.light.white} size={45} />
                                 </View>

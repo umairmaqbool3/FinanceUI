@@ -16,3 +16,10 @@ export const data2 = [
     { title: 'Food', amount: '-$70,40', duration: 'Dinner', date: "19:30 - March 31", icon: FoodIcon },
 
 ]
+
+export const foodData = [
+    { title: 'Food', amount: '-$26,00', duration: '', date: "18:27 - April 30", icon: FoodIcon },
+    { title: 'Delivery Pizza', amount: '-$18,35', duration: '', date: "15:00 - April 24", icon: FoodIcon },
+    { title: 'Lunch', amount: '-$15,40', duration: '', date: "12:30 - April 15", icon: FoodIcon },
+    { title: 'Brunch', amount: '-$12,13', duration: '', date: "9:30 - April 08", icon: FoodIcon },
+]

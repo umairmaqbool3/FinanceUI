@@ -1,12 +1,5 @@
-import CalenderIcon from '@/assets/svgs/CalenderIcon';
-import FoodIcon from '@/assets/svgs/FoodIcon';
-import BalanceComponent from '@/components/BalanceComponent';
-import CustomButton from '@/components/CustomButton';
-import ExpenseListItem from '@/components/ExpenseListItem';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
-import { ThemedText } from '@/components/themed-text';
-import { foodData } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -15,7 +8,7 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
-const FoodScreen = () => {
+const AddExpenseScreen = () => {
   const { width, height } = useWindowDimensions();
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
@@ -23,7 +16,7 @@ const FoodScreen = () => {
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
-        title="Food"
+        title="Add Expense"
         theme={theme}
         leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
         rightIcon={<View style={styles.iconContainer}>
@@ -37,35 +30,16 @@ const FoodScreen = () => {
         }}
       />
 
-      <BalanceComponent />
-
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.67 : 0.90), backgroundColor: Colors[theme].secondary }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacingY._5 }}>
-            <ThemedText>April</ThemedText>
-            <View style={styles.leftIconContainer}>
-              <CalenderIcon />
-            </View>
-          </View>
-          {foodData.map((item, index) => (
-            <ExpenseListItem key={index} item={item} index={index} />
-          ))}
-          <ThemedText style={{ marginVertical: spacingY._7 }}>March</ThemedText>
-          <ExpenseListItem item={{ title: 'Dinner', amount: '-$27,20', duration: '', date: "20:50 - March 31", icon: FoodIcon }} index={0} />
-          <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25 }}>
-            <CustomButton
-              title="Add Expenses"
-              textStyle={{ color: 'black', fontSize: 14, }}
-              onPress={() => router.push('/(categories)/addExpense')}
-            />
-          </View>
+
         </ScrollView>
       </View>
     </Screen>
   );
 };
 
-export default FoodScreen;
+export default AddExpenseScreen;
 
 const styles = StyleSheet.create({
   headerText: {

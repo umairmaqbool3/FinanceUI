@@ -5,7 +5,15 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ThemedText } from './themed-text'
 
-const ExpenseListItem = ({ index, item }: { index: any, item: any }) => {
+interface ExpenseItem {
+    title: string;
+    date: string;
+    duration?: string;
+    amount: string;
+    icon: React.ComponentType<any>;
+}
+
+const ExpenseListItem = ({ index, item }: { index: any, item: ExpenseItem }) => {
     const theme = useColorScheme() ?? 'light';
     return (
         <View key={index} style={[styles.singleItemContainer]}>
@@ -19,14 +27,17 @@ const ExpenseListItem = ({ index, item }: { index: any, item: any }) => {
                 <ThemedText style={{ fontSize: 15 }}>{item.title}</ThemedText>
                 <ThemedText style={{ fontSize: 12, color: Colors.light.focusText, fontWeight: '700' }}>{item.date}</ThemedText>
             </View>
-            {item.duration.length > 0 &&
+            {item.duration ? (
                 <>
                     <View style={styles.verticalDivider} />
                     <View style={{ width: 85, alignItems: 'center' }}>
-                        <ThemedText style={{ fontSize: 13 }}>{item.duration}</ThemedText>
+                        <ThemedText style={{ fontSize: 13 }}>
+                            {String(item.duration)}
+                        </ThemedText>
                     </View>
-                    <View style={styles.verticalDivider} /> </>
-            }
+                    <View style={styles.verticalDivider} />
+                </>
+            ) : null}
 
             <View style={{ width: 75, alignItems: 'flex-end' }}>
                 <ThemedText style={{ color: theme == 'light' ? Colors.light.focusText : Colors[theme].text }}>{item.amount}</ThemedText>

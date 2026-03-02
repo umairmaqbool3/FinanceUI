@@ -19,14 +19,14 @@ import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 let items = [
-    { name: 'Food', icon: FoodIcon, onPress: () => router.push('/(categories)/food') },
-    { name: 'Transport', icon: TransportIcon },
-    { name: 'Medicine', icon: MedicineIcon },
-    { name: 'Groceries', icon: GroceryIcon },
-    { name: 'Rent', icon: RentIcon },
-    { name: 'Gifts', icon: GiftsIcon },
-    { name: 'Savings', icon: SavingsIcon },
-    { name: 'Entertainment', icon: EntertainmentIcon },
+    { name: 'Food', icon: FoodIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Food' } }) },
+    { name: 'Transport', icon: TransportIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Transport' } }) },
+    { name: 'Medicine', icon: MedicineIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Medicine' } }) },
+    { name: 'Groceries', icon: GroceryIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Groceries' } }) },
+    { name: 'Rent', icon: RentIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Rent' } }) },
+    { name: 'Gifts', icon: GiftsIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Gifts' } }) },
+    { name: 'Savings', icon: SavingsIcon, onPress: () => router.push('/(categories)/savings') },
+    { name: 'Entertainment', icon: EntertainmentIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Entertainment' } }) },
     { name: 'More', icon: PlusIcon }
 ]
 
@@ -60,7 +60,7 @@ const CategoryScreen = () => {
                         renderItem={({ item, index }) => (
                             <TouchableOpacity
                                 style={styles.itemContainer}
-                                onPress={item.name == 'Food' ? item.onPress : () => console.log('Pressed')}>
+                                onPress={item.onPress}>
                                 <View style={[styles.itemIconContainer, { backgroundColor: index == 0 ? Colors.light.focusText : '#6DB6FE' }]}>
                                     <item.icon color={Colors.light.white} size={45} />
                                 </View>

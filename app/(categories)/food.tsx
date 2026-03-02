@@ -11,7 +11,7 @@ import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
@@ -19,11 +19,12 @@ const FoodScreen = () => {
   const { width, height } = useWindowDimensions();
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
+  const { headerTitle } = useLocalSearchParams();
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
-        title="Food"
+        title={headerTitle as string}
         theme={theme}
         leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
         rightIcon={<View style={styles.iconContainer}>

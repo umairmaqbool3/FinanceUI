@@ -1,6 +1,7 @@
-import FoodIcon from '@/assets/svgs/FoodIcon';
-import MedicineIcon from '@/assets/svgs/MedicineIcon';
-import TransportIcon from '@/assets/svgs/Transport';
+import CarIcon from '@/assets/svgs/CarIcon';
+import HouseIcon from '@/assets/svgs/HouseIcon';
+import PlaneIcon from '@/assets/svgs/PlaneIcon';
+import WeddingIcon from '@/assets/svgs/WeddingIcon';
 import BalanceComponent from '@/components/BalanceComponent';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
@@ -13,10 +14,10 @@ import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 let items = [
-  { name: 'Travel', icon: FoodIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Travel' } }) },
-  { name: 'New House', icon: TransportIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'New House' } }) },
-  { name: 'Car', icon: MedicineIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Car' } }) },
-  { name: 'Wedding', icon: MedicineIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Wedding' } }) },
+  { name: 'Travel', icon: PlaneIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Travel' } }) },
+  { name: 'New House', icon: HouseIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'New House' } }) },
+  { name: 'Car', icon: CarIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Car' } }) },
+  { name: 'Wedding', icon: WeddingIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Wedding' } }) },
 ]
 
 const SavingScreen = () => {
@@ -32,7 +33,7 @@ const SavingScreen = () => {
         rightIcon={<View style={styles.iconContainer}>
           <Ionicons name="notifications-outline" size={20} />
         </View>}
-        onLeftPress={() => router.replace('/(tabs)')}
+        onLeftPress={() => router.back()}
         onRightPress={() => console.log('Notifications/Right pressed')}
         style={{
           marginHorizontal: spacingX._12,

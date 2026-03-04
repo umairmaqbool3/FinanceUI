@@ -14,10 +14,10 @@ import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 let items = [
-  { name: 'Travel', icon: PlaneIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Travel' } }) },
-  { name: 'New House', icon: HouseIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'New House' } }) },
-  { name: 'Car', icon: CarIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Car' } }) },
-  { name: 'Wedding', icon: WeddingIcon, onPress: () => router.push({ pathname: '/(categories)/food', params: { headerTitle: 'Wedding' } }) },
+  { name: 'Travel', icon: PlaneIcon, onPress: () => router.push({ pathname: '/(categories)/savingsItems', params: { headerTitle: 'Travel' } }) },
+  { name: 'New House', icon: HouseIcon, onPress: () => router.push({ pathname: '/(categories)/savingsItems', params: { headerTitle: 'New House' } }) },
+  { name: 'Car', icon: CarIcon, onPress: () => router.push({ pathname: '/(categories)/savingsItems', params: { headerTitle: 'Car' } }) },
+  { name: 'Wedding', icon: WeddingIcon, onPress: () => router.push({ pathname: '/(categories)/savingsItems', params: { headerTitle: 'Wedding' } }) },
 ]
 
 const SavingScreen = () => {

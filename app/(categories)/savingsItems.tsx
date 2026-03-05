@@ -1,4 +1,5 @@
 import CalenderIcon from '@/assets/svgs/CalenderIcon';
+import ExpenseIcon from '@/assets/svgs/ExpenseIcon';
 import IncomeIcon from '@/assets/svgs/IncomeIcon';
 import PlaneIcon from '@/assets/svgs/PlaneIcon';
 import CustomButton from '@/components/CustomButton';
@@ -15,7 +16,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
-const SIZE = 90;
+const SIZE = 80;
 const BORDER_WIDTH = 3;
 
 const SavingsItem = () => {
@@ -44,20 +45,27 @@ const SavingsItem = () => {
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.83 : 0.90), backgroundColor: Colors[theme].secondary }]}>
         <View style={styles.container}>
           <View>
-            <View>
+            <View style={styles.rowTextView}>
               <IncomeIcon color={theme == 'light' ? Colors.light.text : Colors.dark.text} />
+              <ThemedText style={{ fontSize: 13 }}>Goal</ThemedText>
             </View>
-            <ThemedText>$1,962.93</ThemedText>
+            <ThemedText style={{ marginLeft: spacingX._15, fontWeight: '700', fontSize: 18, marginBottom: spacingY._10 }}>$1,962.93</ThemedText>
+            <View style={styles.rowTextView}>
+              <ExpenseIcon color={theme == 'light' ? Colors.light.text : Colors.dark.text} />
+              <ThemedText style={{ fontSize: 13 }}>Amount Saved</ThemedText>
+            </View>
+            <ThemedText style={{ marginLeft: spacingX._15, fontWeight: '700', fontSize: 18, color: Colors.light.primary }}>$653.31</ThemedText>
           </View>
-          <View>
+          <View style={styles.wrapperContainer}>
             <View style={styles.wrapper}>
               {/* White half */}
               <View style={[styles.halfBorder, styles.whiteHalf]} />
               {/* Green half */}
               <View style={[styles.halfBorder, styles.greenHalf]} />
               {/* Icon container */}
-              <PlaneIcon />
+              <PlaneIcon size={45} />
             </View>
+            <ThemedText style={{ fontSize: 13, textAlign: 'center' }}>Travel</ThemedText>
           </View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -120,31 +128,38 @@ const styles = StyleSheet.create({
     gap: spacingX._20,
   },
   wrapper: {
-    width: SIZE,
+    width: SIZE + 20,
     height: SIZE,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   halfBorder: {
     position: 'absolute',
     width: SIZE,
     height: SIZE,
-    borderRadius: SIZE / 2,
+    borderRadius: SIZE,
     borderWidth: BORDER_WIDTH,
   },
-
   whiteHalf: {
     borderColor: Colors.light.focusText,
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
     transform: [{ rotate: '135deg' }],
   },
-
   greenHalf: {
     borderColor: Colors.light.white,
     borderLeftColor: 'transparent',
     borderTopColor: 'transparent',
     transform: [{ rotate: '135deg' }],
   },
+  wrapperContainer: {
+    backgroundColor: '#6DB6FE',
+    padding: spacingX._15,
+    borderRadius: spacingY._30
+  },
+  rowTextView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5
+  }
 });

@@ -1,4 +1,5 @@
 import CalenderIcon from '@/assets/svgs/CalenderIcon';
+import CheckIcon from '@/assets/svgs/CheckIcon';
 import ExpenseIcon from '@/assets/svgs/ExpenseIcon';
 import IncomeIcon from '@/assets/svgs/IncomeIcon';
 import PlaneIcon from '@/assets/svgs/PlaneIcon';
@@ -14,7 +15,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 const SIZE = 80;
 const BORDER_WIDTH = 3;
@@ -65,11 +66,33 @@ const SavingsItem = () => {
               {/* Icon container */}
               <PlaneIcon size={45} />
             </View>
-            <ThemedText style={{ fontSize: 13, textAlign: 'center' }}>Travel</ThemedText>
+            <ThemedText style={{ fontSize: 13, textAlign: 'center' }}>{headerTitle}</ThemedText>
           </View>
         </View>
+        <View style={styles.bar}>
+          <View style={styles.barBlack}
+          >
+            <Text style={{ color: Colors.light.secondaryBtn, marginLeft: spacingX._20 }}>40%</Text>
+            <View style={styles.barSecondary}>
+              <Text
+                style={{
+                  color: Colors.light.text,
+                  textAlign: 'right',
+                  marginRight: spacingX._20,
+                  fontStyle: 'italic',
+                }}
+              >
+                $1,962.93
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View style={[styles.rowStart]}>
+          <CheckIcon theme={theme} />
+          <ThemedText style={{ fontSize: 13 }}>30% Of Your Expenses, Looks Good.</ThemedText>
+        </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacingY._5 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacingY._5, marginTop: spacingY._15 }}>
             <ThemedText>April</ThemedText>
             <View style={styles.leftIconContainer}>
               <CalenderIcon />
@@ -161,5 +184,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5
-  }
+  },
+  rowStart: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: spacingX._10,
+    marginLeft: 10
+  },
+  bar: {
+    marginVertical: spacingY._7,
+    // marginHorizontal: -spacingX._10,
+  },
+  barBlack: {
+    height: 28,
+    width: '100%',
+    backgroundColor: Colors.light.primary,
+    borderRadius: 20,
+    justifyContent: 'center',
+  },
+  barSecondary: {
+    height: 28,
+    width: '75%',
+    backgroundColor: Colors.light.secondaryBtn,
+    borderRadius: 20,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 0,
+  },
+  leftIconContainer: {
+    backgroundColor: Colors.light.primary,
+    borderRadius: 14,
+    width: 35,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

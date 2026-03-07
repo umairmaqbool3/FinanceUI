@@ -8,7 +8,7 @@ import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -28,6 +28,7 @@ const AddExpenseScreen = () => {
   const { width, height } = useWindowDimensions();
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
+  const { screenTitle } = useLocalSearchParams();
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [value, setValue] = useState(null);
@@ -53,7 +54,7 @@ const AddExpenseScreen = () => {
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
       <Header
-        title="Add Expense"
+        title={screenTitle as string}
         theme={theme}
         leftIcon={<Ionicons name="arrow-back" size={24} color={Colors[theme].text} />}
         rightIcon={<View style={styles.iconContainer}>

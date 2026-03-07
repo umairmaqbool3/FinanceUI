@@ -57,7 +57,7 @@ const FoodScreen = () => {
             <CustomButton
               title="Add Expenses"
               textStyle={{ color: 'black', fontSize: 14, }}
-              onPress={() => router.push('/(categories)/addExpense')}
+              onPress={() => router.push({ pathname: '/(categories)/addExpense', params: { screenTitle: 'Add Expenses' } })}
             />
           </View>
         </ScrollView>

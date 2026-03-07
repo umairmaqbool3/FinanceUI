@@ -8,6 +8,7 @@ import RentIcon from '@/assets/svgs/RentIcon';
 import SavingsIcon from '@/assets/svgs/SavingsIcon';
 import TransportIcon from '@/assets/svgs/Transport';
 import BalanceComponent from '@/components/BalanceComponent';
+import CategoryModal from '@/components/CategoryModal';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
 import { Colors } from '@/constants/theme';
@@ -15,7 +16,7 @@ import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
 let items = [
@@ -33,6 +34,8 @@ let items = [
 const CategoryScreen = () => {
     const theme = useColorScheme() ?? 'light';
     const { width, height } = useWindowDimensions();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    console.log("isModalVisible : ", isModalVisible)
 
     return (
         <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -60,7 +63,7 @@ const CategoryScreen = () => {
                         renderItem={({ item, index }) => (
                             <TouchableOpacity
                                 style={styles.itemContainer}
-                                onPress={item.onPress}>
+                                onPress={item.name == 'More' ? () => setIsModalVisible(true) : item.onPress}>
                                 <View style={[styles.itemIconContainer, { backgroundColor: index == 0 ? Colors.light.focusText : '#6DB6FE' }]}>
                                     <item.icon color={Colors.light.white} size={45} />
                                 </View>
@@ -73,6 +76,10 @@ const CategoryScreen = () => {
                     />
                 </View>
             </View>
+            <CategoryModal
+                visible={isModalVisible}
+                onClose={() => setIsModalVisible(false)}
+            />
         </Screen>
     );
 };

@@ -105,7 +105,7 @@ const SavingsItem = () => {
             <CustomButton
               title="Add Savings"
               textStyle={{ color: 'black', fontSize: 14, }}
-              onPress={() => router.push('/(categories)/addExpense')}
+              onPress={() => router.push({ pathname: '/(categories)/addExpense', params: { screenTitle: 'Add Savings' } })}
             />
           </View>
         </ScrollView>

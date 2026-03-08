@@ -8,7 +8,25 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Platform, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { BarChart } from "react-native-gifted-charts";
+
+const data = [
+    { value: 2500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Jan' },
+    { value: 2400, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+
+    { value: 3500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Feb' },
+    { value: 3000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+
+    { value: 4500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Mar' },
+    { value: 4000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+
+    { value: 5200, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Apr' },
+    { value: 4900, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+
+    { value: 3000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'May' },
+    { value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+];
 
 const SearchScreen = () => {
     const theme = useColorScheme() ?? 'light';
@@ -41,6 +59,46 @@ const SearchScreen = () => {
                     width={width - 55}
                     height={55}
                 />
+
+                <View
+                    style={{
+                        margin: 6,
+                        padding: 25,
+                        borderRadius: 40,
+                        width: '100%',
+                        backgroundColor: Colors.light.secondaryBtn,
+                    }}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 15 }}>
+                        <Text style={{ color: Colors.light.text, fontSize: 14, fontWeight: 'bold' }}>
+                            Income & Expenses
+                        </Text>
+                        <Text style={{ color: Colors.light.text, fontSize: 12, fontWeight: 'bold' }}>
+                            View All
+                        </Text>
+                    </View>
+
+                    <View style={{ alignItems: 'center' }}>
+                        <BarChart
+                            data={data}
+                            barWidth={10}
+                            initialSpacing={15}
+                            spacing={20}
+                            barBorderRadius={8}
+                            yAxisThickness={0}
+                            xAxisType={'solid'}
+                            xAxisColor={'black'}
+                            yAxisTextStyle={{ color: Colors.light.focusText }}
+                            yAxisOffset={1}
+                            maxValue={15000}
+                            noOfSections={4}
+                            yAxisLabelTexts={['', '1k', '5k', '10k', '15k']}
+                            labelWidth={40}
+                            xAxisLabelTextStyle={{ color: Colors.light.text, textAlign: 'center' }}
+                            backgroundColor={Colors.light.secondaryBtn}
+                        />
+                    </View>
+                </View>
             </View>
         </Screen>
     );

@@ -1,3 +1,4 @@
+import CalenderIcon from '@/assets/svgs/CalenderIcon';
 import BalanceComponent from '@/components/BalanceComponent';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
@@ -6,26 +7,27 @@ import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { BarChart } from "react-native-gifted-charts";
 
 const data = [
-    { value: 2500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Jan' },
-    { value: 2400, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+    { value: 5000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Jan' },
+    { value: 7000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
 
-    { value: 3500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Feb' },
-    { value: 3000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+    { value: 11000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Feb' },
+    { value: 12000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
 
-    { value: 4500, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Mar' },
-    { value: 4000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+    { value: 11000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Mar' },
+    { value: 10000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
 
-    { value: 5200, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Apr' },
-    { value: 4900, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+    { value: 13000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'Apr' },
+    { value: 9000, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
 
-    { value: 3000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'May' },
-    { value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
+    { value: 7000, frontColor: '#006DFF', gradientColor: '#009FFF', spacing: 6, label: 'May' },
+    { value: 7800, frontColor: '#3BE9DE', gradientColor: '#93FCF8' },
 ];
 
 const SearchScreen = () => {
@@ -59,46 +61,53 @@ const SearchScreen = () => {
                     width={width - 55}
                     height={55}
                 />
+                <ScrollView showsVerticalScrollIndicator={false} style={{ paddingRight: 7 }}>
+                    <View
+                        style={{
+                            margin: 6,
+                            padding: 25,
+                            borderRadius: 40,
+                            width: '100%',
+                            backgroundColor: Colors.light.secondaryBtn,
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 15 }}>
+                            <Text style={{ color: Colors.light.text, fontSize: 14, fontWeight: 'bold' }}>
+                                Income & Expenses
+                            </Text>
+                            <View style={{ flexDirection: 'row', gap: spacingX._5 }}>
+                                <View style={styles.rightIconContainer}>
+                                    <Feather name="search" size={18} color="black" />
+                                </View>
+                                <View style={styles.rightIconContainer}>
+                                    <CalenderIcon size={18} />
+                                </View>
+                            </View>
+                        </View>
 
-                <View
-                    style={{
-                        margin: 6,
-                        padding: 25,
-                        borderRadius: 40,
-                        width: '100%',
-                        backgroundColor: Colors.light.secondaryBtn,
-                    }}
-                >
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 15 }}>
-                        <Text style={{ color: Colors.light.text, fontSize: 14, fontWeight: 'bold' }}>
-                            Income & Expenses
-                        </Text>
-                        <Text style={{ color: Colors.light.text, fontSize: 12, fontWeight: 'bold' }}>
-                            View All
-                        </Text>
+                        <View style={{ alignItems: 'center' }}>
+                            <BarChart
+                                data={data}
+                                barWidth={8}
+                                initialSpacing={15}
+                                spacing={25}
+                                barBorderRadius={8}
+                                yAxisThickness={0}
+                                xAxisType={'solid'}
+                                xAxisColor={'black'}
+                                yAxisTextStyle={{ color: Colors.light.focusText }}
+                                yAxisOffset={1}
+                                maxValue={15000}
+                                noOfSections={4}
+                                yAxisLabelTexts={['', '1k', '5k', '10k', '15k']}
+                                labelWidth={40}
+                                xAxisLabelTextStyle={{ color: Colors.light.text, textAlign: 'center' }}
+                                backgroundColor={Colors.light.secondaryBtn}
+                            />
+                        </View>
                     </View>
+                </ScrollView>
 
-                    <View style={{ alignItems: 'center' }}>
-                        <BarChart
-                            data={data}
-                            barWidth={10}
-                            initialSpacing={15}
-                            spacing={20}
-                            barBorderRadius={8}
-                            yAxisThickness={0}
-                            xAxisType={'solid'}
-                            xAxisColor={'black'}
-                            yAxisTextStyle={{ color: Colors.light.focusText }}
-                            yAxisOffset={1}
-                            maxValue={15000}
-                            noOfSections={4}
-                            yAxisLabelTexts={['', '1k', '5k', '10k', '15k']}
-                            labelWidth={40}
-                            xAxisLabelTextStyle={{ color: Colors.light.text, textAlign: 'center' }}
-                            backgroundColor={Colors.light.secondaryBtn}
-                        />
-                    </View>
-                </View>
             </View>
         </Screen>
     );
@@ -120,5 +129,13 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.secondaryBtn,
         padding: spacingX._5,
         borderRadius: 50,
+    },
+    rightIconContainer: {
+        backgroundColor: Colors.light.primary,
+        borderRadius: 12,
+        width: 30,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

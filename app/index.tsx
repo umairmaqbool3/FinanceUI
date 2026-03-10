@@ -11,7 +11,6 @@ const SplashScreen = () => {
     useEffect(() => {
         setTimeout(() => {
             router.replace('/(auth)/onboarding')
-            // router.replace('/(animations)/day1Basic')
         }, 1500)
     }, [])
 

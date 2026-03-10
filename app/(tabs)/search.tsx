@@ -1,8 +1,11 @@
 import CalenderIcon from '@/assets/svgs/CalenderIcon';
+import ExpenseIcon from '@/assets/svgs/ExpenseIcon';
+import IncomeIcon from '@/assets/svgs/IncomeIcon';
 import BalanceComponent from '@/components/BalanceComponent';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
 import { SegmentedControl } from '@/components/SegmentedControl';
+import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -106,6 +109,18 @@ const SearchScreen = () => {
                             />
                         </View>
                     </View>
+                    <View style={styles.incomeExpenseView}>
+                        <View style={styles.alignItemCenter}>
+                            <IncomeIcon size={24} color={Colors.light.primary} />
+                            <ThemedText style={styles.fontSize14}>Income</ThemedText>
+                            <ThemedText>$11,420.00</ThemedText>
+                        </View>
+                        <View style={styles.alignItemCenter}>
+                            <ExpenseIcon size={24} color={Colors.light.focusText} />
+                            <ThemedText style={styles.fontSize14}>Expense</ThemedText>
+                            <ThemedText style={{ color: Colors.light.focusText }}>$20,000.20</ThemedText>
+                        </View>
+                    </View>
                 </ScrollView>
 
             </View>
@@ -138,4 +153,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    alignItemCenter: {
+        alignItems: 'center',
+    },
+    fontSize14: {
+        fontSize: 14
+    },
+    incomeExpenseView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        marginVertical: spacingY._15
+    },
+
 });

@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
 import React from 'react';
-import { Platform, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { BarChart } from "react-native-gifted-charts";
 
 const data = [
@@ -79,9 +79,9 @@ const SearchScreen = () => {
                                 Income & Expenses
                             </Text>
                             <View style={{ flexDirection: 'row', gap: spacingX._5 }}>
-                                <View style={styles.rightIconContainer}>
+                                <TouchableOpacity style={styles.rightIconContainer} onPress={() => router.push('/(analysis)/searchIncomeExpense')}>
                                     <Feather name="search" size={18} color="black" />
-                                </View>
+                                </TouchableOpacity>
                                 <View style={styles.rightIconContainer}>
                                     <CalenderIcon size={18} />
                                 </View>

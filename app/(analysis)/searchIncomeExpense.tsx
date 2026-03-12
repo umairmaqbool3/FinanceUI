@@ -110,6 +110,23 @@ const SearchIncomeExpense = () => {
             </Pressable>
           </View>
 
+
+          {/* Transaction Type Radio Buttons */}
+          <View style={styles.radioContainer}>
+            <Pressable style={styles.radioButton} onPress={() => setTransactionType('income')}>
+              <View style={[styles.radioOuter, transactionType === 'income' && styles.radioSelected]}>
+                <View style={[styles.radioInner, { backgroundColor: transactionType === 'income' ? Colors.light.primary : 'transparent' }]} />
+              </View>
+              <Text style={[styles.radioLabel, { color: Colors[theme].text }]}>Income</Text>
+            </Pressable>
+            <Pressable style={styles.radioButton} onPress={() => setTransactionType('expense')}>
+              <View style={[styles.radioOuter, transactionType === 'expense' && styles.radioSelected]}>
+                <View style={[styles.radioInner, { backgroundColor: transactionType === 'expense' ? Colors.light.primary : 'transparent' }]} />
+              </View>
+              <Text style={[styles.radioLabel, { color: Colors[theme].text }]}>Expense</Text>
+            </Pressable>
+          </View>
+
           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25 }}>
             <CustomButton
               title="Search"
@@ -117,7 +134,6 @@ const SearchIncomeExpense = () => {
               onPress={() => router.back()}
             />
           </View>
-
 
           <CustomDatePicker
             value={date}
@@ -193,7 +209,7 @@ const styles = StyleSheet.create({
   dropdown: {
     height: 40,
     backgroundColor: Colors.light.secondaryBtn,
-    borderRadius: 12,
+    borderRadius: 20,
     padding: 12,
     shadowColor: '#000',
     shadowOffset: {
@@ -235,20 +251,23 @@ const styles = StyleSheet.create({
   // New styles for radio buttons
   radioContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: spacingY._15,
+    justifyContent: 'flex-start',
+    marginVertical: spacingY._25,
     marginBottom: spacingY._15,
+    gap: spacingX._40,
+    marginLeft: 6
   },
   radioButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 6
   },
   radioOuter: {
     width: 20,
     height: 20,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: Colors.light.text,
+    borderWidth: 1,
+    borderColor: Colors.light.primary,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 6,
@@ -257,13 +276,13 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: Colors.light.text,
+    borderColor: Colors.light.primary,
+    borderWidth: 1
   },
   radioSelected: {
     borderColor: Colors.light.primary,
   },
   radioLabel: {
     fontSize: 14,
-    color: Colors.light.text,
   },
 });

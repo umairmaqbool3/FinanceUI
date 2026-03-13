@@ -82,9 +82,9 @@ const SearchScreen = () => {
                                 <TouchableOpacity style={styles.rightIconContainer} onPress={() => router.push('/(analysis)/searchIncomeExpense')}>
                                     <Feather name="search" size={18} color="black" />
                                 </TouchableOpacity>
-                                <View style={styles.rightIconContainer}>
+                                <TouchableOpacity style={styles.rightIconContainer} onPress={() => router.push('/(analysis)/calender')}>
                                     <CalenderIcon size={18} />
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
 

@@ -7,6 +7,7 @@ const CustomButton = ({
     onPress = () => { },
     backgroundColor = Colors.light.primary,
     width = 200,
+    height = 40,
     containerStyle = {},
     textStyle = {},
 }) => {
@@ -15,7 +16,7 @@ const CustomButton = ({
             onPress={onPress}
             style={[
                 styles.button,
-                { backgroundColor, width },
+                { backgroundColor, width, height },
                 containerStyle
             ]}
         >

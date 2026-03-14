@@ -1,4 +1,5 @@
 import CustomButton from '@/components/CustomButton';
+import CustomDropdown from '@/components/CustomDropdown';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
 import { Colors } from '@/constants/theme';
@@ -6,14 +7,41 @@ import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
+const months = [
+  { label: 'January', value: 'january' },
+  { label: 'February', value: 'february' },
+  { label: 'March', value: 'march' },
+  { label: 'April', value: 'april' },
+  { label: 'May', value: 'may' },
+  { label: 'June', value: 'june' },
+  { label: 'July', value: 'july' },
+  { label: 'August', value: 'august' },
+  { label: 'September', value: 'september' },
+  { label: 'October', value: 'october' },
+  { label: 'November', value: 'november' },
+  { label: 'December', value: 'december' },
+]
+
+const years = [
+  { label: '2020', value: '2020' },
+  { label: '2021', value: '2021' },
+  { label: '2022', value: '2022' },
+  { label: '2023', value: '2023' },
+  { label: '2024', value: '2024' },
+  { label: '2025', value: '2025' },
+  { label: '2026', value: '2026' },
+  { label: '2027', value: '2027' },
+]
 
 const CalenderScreen = () => {
   const { width, height } = useWindowDimensions();
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
+  const [selectedMonth, setSelectedMonth] = useState<string | number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | number | null>(null);
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -35,10 +63,20 @@ const CalenderScreen = () => {
       <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.78 : 0.85), backgroundColor: Colors[theme].secondary }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
 
-          <View>
-
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
+            <CustomDropdown
+              options={months}
+              selectedValue={selectedMonth}
+              onSelect={(option) => setSelectedMonth(option.value)}
+              placeholder="Select Month"
+            />
+            <CustomDropdown
+              options={years}
+              selectedValue={selectedYear}
+              onSelect={(option) => setSelectedYear(option.value)}
+              placeholder="Select Year"
+            />
           </View>
-
 
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25, gap: 15 }}>
             <CustomButton

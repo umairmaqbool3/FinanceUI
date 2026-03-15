@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 
 const months = [
   { label: 'January', value: 'january' },
@@ -40,8 +41,16 @@ const CalenderScreen = () => {
   const { width, height } = useWindowDimensions();
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
-  const [selectedMonth, setSelectedMonth] = useState<string | number | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string | number | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<string | number | null>(new Date().toLocaleString('default', { month: 'long' }).toLocaleLowerCase());
+  const [selectedYear, setSelectedYear] = useState<string | number | null>(new Date().getFullYear().toString());
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+
+  const handleMonthChange = (newMonthYear: any) => {
+    // newMonthYear should be a string in 'YYYY-MM-DD' format, 
+    // e.g., '2025-10-01' for October 2025
+    setSelectedDate(newMonthYear);
+  };
+
 
   return (
     <Screen style={{ backgroundColor: Colors[theme].primary }}>
@@ -77,6 +86,28 @@ const CalenderScreen = () => {
               placeholder="Select Year"
             />
           </View>
+
+          <Calendar
+            style={{
+              height: 350,
+            }}
+            hideArrows={true}
+            firstDay={1}
+            initialDate={new Date().toISOString().split('T')[0].toString()}
+            // current={selectedYear && selectedMonth ? `${selectedYear}-${selectedMonth}` : new Date().toISOString().split('T')[0].toString()}
+            theme={{
+              'stylesheet.calendar.header': {
+                header: {
+                  height: 0
+                }
+              },
+              calendarBackground: Colors[theme].secondary,
+              textSectionTitleColor: Colors.light.focusText,
+              selectedDayBackgroundColor: '#00adf5',
+              todayTextColor: '#00adf5',
+              dayTextColor: Colors[theme].text,
+            }}
+          />
 
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25, gap: 15 }}>
             <CustomButton
@@ -120,7 +151,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     paddingHorizontal: spacingX._30,
-    paddingTop: spacingY._25,
+    paddingTop: spacingY._15,
     width: '100%',
     position: 'absolute',
     bottom: 0,

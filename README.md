@@ -15,3 +15,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
    npx expo start
    ```
+
+
+   ## Figma Design
+   https://www.figma.com/design/OpxFRwVO0yam3E0GKBb94A/Finance-Management-Mobile-App-UI-UX-Kit-for-Budget-Tracker-Financial-Prototype-Design--Community-?t=3EL2GYN87n4C06Tv-0

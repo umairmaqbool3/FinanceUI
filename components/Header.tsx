@@ -10,7 +10,7 @@ interface HeaderProps {
     onLeftPress?: () => void;
     onRightPress?: () => void;
     style?: StyleProp<ViewStyle>;
-    theme: string
+    theme: 'light' | 'dark';
 }
 
 // How to use this component

@@ -1,15 +1,20 @@
-import CustomButton from '@/components/CustomButton';
+import AnimatedSemiCircle from '@/components/AnimatedSemiCircle';
 import CustomDropdown from '@/components/CustomDropdown';
+import ExpenseListItem from '@/components/ExpenseListItem';
 import Header from '@/components/Header';
 import Screen from '@/components/Screen';
+import { data } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { spacingX, spacingY } from '@/constants/theme1';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const months = [
   { label: 'January', value: 'january' },
@@ -39,17 +44,44 @@ const years = [
 
 const CalenderScreen = () => {
   const { width, height } = useWindowDimensions();
+  const date = new Date();
+  const today = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   const router = useRouter();
   const theme = useColorScheme() ?? 'light';
   const [selectedMonth, setSelectedMonth] = useState<string | number | null>(new Date().toLocaleString('default', { month: 'long' }).toLocaleLowerCase());
   const [selectedYear, setSelectedYear] = useState<string | number | null>(new Date().getFullYear().toString());
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [spends, setSpends] = useState(true);
 
   const handleMonthChange = (newMonthYear: any) => {
     // newMonthYear should be a string in 'YYYY-MM-DD' format, 
     // e.g., '2025-10-01' for October 2025
     setSelectedDate(newMonthYear);
   };
+
+  const spendsAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: withTiming(spends ? Colors.light.primary : Colors.light.secondaryBtn, { duration: 500 }),
+    };
+  });
+
+  const categoriesAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: withTiming(!spends ? Colors.light.primary : Colors.light.secondaryBtn, { duration: 500 }),
+    };
+  });
+
+  const spendsDataAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: withTiming(spends ? 1 : 0, { duration: 500 }),
+    }
+  })
+
+  const categoryDataAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: withTiming(!spends ? 1 : 0, { duration: 500 }),
+    }
+  })
 
 
   return (
@@ -69,7 +101,7 @@ const CalenderScreen = () => {
         }}
       />
 
-      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.78 : 0.85), backgroundColor: Colors[theme].secondary }]}>
+      <View style={[styles.contentContainer, { height: height * (Platform.OS == 'ios' ? 0.80 : 0.85), backgroundColor: Colors[theme].secondary }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
@@ -89,12 +121,16 @@ const CalenderScreen = () => {
 
           <Calendar
             style={{
-              height: 350,
+              height: 340,
             }}
             hideArrows={true}
             firstDay={1}
             initialDate={new Date().toISOString().split('T')[0].toString()}
-            // current={selectedYear && selectedMonth ? `${selectedYear}-${selectedMonth}` : new Date().toISOString().split('T')[0].toString()}
+            current={
+              selectedYear && selectedMonth
+                ? `${selectedYear}-05-01`
+                : today
+            }
             theme={{
               'stylesheet.calendar.header': {
                 header: {
@@ -106,26 +142,43 @@ const CalenderScreen = () => {
               selectedDayBackgroundColor: '#00adf5',
               todayTextColor: '#00adf5',
               dayTextColor: Colors[theme].text,
-            }}
+            } as any}
           />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: spacingY._25, gap: 15 }}>
-            <CustomButton
-              title="Spends"
-              textStyle={{ color: 'black', fontSize: 13, fontWeight: '400' }}
-              onPress={() => router.back()}
-              width={150}
-              height={38}
-            />
-            <CustomButton
-              title="Categories"
-              textStyle={{ color: 'black', fontSize: 13, fontWeight: '400' }}
-              onPress={() => router.back()}
-              containerStyle={{ backgroundColor: Colors.light.secondaryBtn }}
-              width={150}
-              height={38}
-            />
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: -spacingY._10, gap: 15, marginBottom: spacingY._10 }}>
+            <AnimatedPressable
+              onPress={() => setSpends(true)}
+              style={[
+                { width: 150, height: 38, borderRadius: 50, alignItems: 'center', justifyContent: 'center' },
+                spendsAnimatedStyle
+              ]}
+            >
+              <Text style={{ color: 'black', fontSize: 13, fontWeight: '400' }}>Spends</Text>
+            </AnimatedPressable>
+            <AnimatedPressable
+              onPress={() => setSpends(false)}
+              style={[
+                { width: 150, height: 38, borderRadius: 50, alignItems: 'center', justifyContent: 'center' },
+                categoriesAnimatedStyle
+              ]}
+            >
+              <Text style={{ color: 'black', fontSize: 13, fontWeight: '400' }}>Categories</Text>
+            </AnimatedPressable>
           </View>
+
+          {spends ? (
+            <Animated.View style={[spendsDataAnimatedStyle]}>
+              {data.slice(0, 2).map((item, index) => (
+                <ExpenseListItem key={index} item={item} index={index} />
+              ))}
+            </Animated.View>
+          ) : (
+            <Animated.View style={[categoryDataAnimatedStyle]}>
+              <AnimatedSemiCircle />
+            </Animated.View>
+
+          )}
+
 
         </ScrollView>
       </View>
@@ -169,5 +222,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });

@@ -6,7 +6,18 @@ import {
   StyleSheet
 } from 'react-native';
 
-const CustomSwitch = ({
+interface CustomSwitchProps {
+  value?: boolean;
+  onValueChange?: (value: boolean) => void;
+  width?: number;
+  height?: number;
+  activeColor?: string;
+  inactiveColor?: string;
+  thumbColor?: string;
+  disabled?: boolean;
+}
+
+const CustomSwitch: React.FC<CustomSwitchProps> = ({
   value = false,
   onValueChange,
   width = 45,
